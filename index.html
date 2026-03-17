@@ -1,5 +1,3 @@
-
-
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap');
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -39,6 +37,7 @@
     .schedule-page,.about-page,.results-section{padding-left:1.25rem!important;padding-right:1.25rem!important;}
     .reserve-page{padding:1rem .75rem 5rem!important;}
     .reserve-header{flex-direction:column!important;align-items:flex-start!important;}
+    .submit-grid{grid-template-columns:1fr!important;}
   }
   @media(min-width:681px) and (max-width:900px){
     .hero{grid-template-columns:1fr!important;min-height:auto!important;}
@@ -77,8 +76,8 @@
   .signin-sub{font-size:14px;color:var(--gray-500);text-align:center;margin-bottom:2rem;}
   .field{margin-bottom:14px;}
   .field label{display:block;font-size:13px;color:var(--gray-700);margin-bottom:6px;font-weight:500;}
-  .field input{width:100%;padding:11px 14px;border:.5px solid var(--gray-300);border-radius:8px;font-family:'DM Sans';font-size:15px;outline:none;}
-  .field input:focus{border-color:var(--accent);}
+  .field input,.field select{width:100%;padding:11px 14px;border:.5px solid var(--gray-300);border-radius:8px;font-family:'DM Sans';font-size:15px;outline:none;background:#fff;color:var(--black);}
+  .field input:focus,.field select:focus{border-color:var(--accent);}
   .btn-full{width:100%;padding:13px;border-radius:8px;font-family:'DM Sans';font-size:15px;font-weight:500;cursor:pointer;margin-top:6px;}
   .btn-signin{background:var(--accent);color:#fff;border:none;}
   .signin-footer{text-align:center;margin-top:1.5rem;font-size:14px;color:var(--gray-500);}
@@ -145,18 +144,37 @@
   .coach-role{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin:3px 0 7px;}
   .coach-bio{font-size:13px;color:var(--gray-700);line-height:1.6;}
   .coach-stat{display:inline-block;font-size:11px;background:var(--accent-light);color:var(--accent-dark);padding:3px 9px;border-radius:20px;margin-top:7px;margin-right:4px;}
+
+  /* ── RESULTS ── */
   .results-section{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem;}
   .results-section h1{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:1px;margin-bottom:1.5rem;}
   .results-section h1 span{color:var(--accent);}
-  .results-table{width:100%;border-collapse:collapse;font-size:15px;margin-bottom:1.5rem;}
+  .results-card{background:#fff;border:.5px solid var(--gray-100);border-radius:12px;padding:1.25rem;margin-bottom:20px;}
+  .results-card h3{font-size:14px;font-weight:500;margin-bottom:1rem;padding-bottom:10px;border-bottom:.5px solid var(--gray-100);}
+  .results-table{width:100%;border-collapse:collapse;font-size:15px;}
   .results-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--gray-500);padding:0 14px 12px;border-bottom:.5px solid var(--gray-100);}
-  .results-table td{padding:13px 14px;border-bottom:.5px solid var(--gray-100);}
+  .results-table td{padding:13px 14px;border-bottom:.5px solid var(--gray-100);vertical-align:middle;}
   .results-table tr:last-child td{border-bottom:none;}
   .results-table tr:hover td{background:var(--accent-light);}
   .rank-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;}
   .rank-1{background:#fef3e2;color:#8a5a00;}.rank-2{background:var(--gray-100);color:var(--gray-700);}.rank-3{background:var(--accent-light);color:var(--accent-dark);}.rank-other{background:var(--gray-50);color:var(--gray-500);}
   .time-val{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--accent);}
-  .pr-badge{font-size:11px;background:#e8f4ee;color:#1d6a3a;padding:2px 8px;border-radius:20px;margin-left:6px;font-weight:500;}
+  .pr-badge{font-size:11px;background:#e8f4ee;color:#1d6a3a;padding:2px 8px;border-radius:20px;margin-left:6px;font-weight:500;vertical-align:middle;}
+
+  /* Submit form */
+  .submit-card{background:#fff;border:.5px solid var(--gray-100);border-radius:12px;padding:1.5rem;}
+  .submit-card h3{font-size:16px;font-weight:500;margin-bottom:1.25rem;}
+  .submit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .submit-grid .field{margin-bottom:0;}
+  .submit-grid .field.full{grid-column:1/-1;}
+  .field label{display:block;font-size:13px;color:var(--gray-700);margin-bottom:5px;font-weight:500;}
+  .field input,.field select{width:100%;padding:9px 12px;border:.5px solid var(--gray-300);border-radius:8px;font-family:'DM Sans';font-size:14px;outline:none;background:#fff;color:var(--black);}
+  .field input:focus,.field select:focus{border-color:var(--accent);}
+  .submit-btn{margin-top:16px;width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:'DM Sans';font-size:15px;font-weight:500;cursor:pointer;}
+  .submit-btn:hover{background:var(--accent-dark);}
+  .submit-success{display:none;margin-top:14px;background:#e8f4ee;color:#1d6a3a;border-radius:8px;padding:10px 14px;font-size:14px;font-weight:500;text-align:center;}
+
+  /* RESERVE */
   .reserve-page{max-width:1100px;margin:0 auto;padding:2.5rem 2rem 5rem;}
   .reserve-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
   .reserve-header h1{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:1px;}
@@ -167,8 +185,6 @@
   .date-nav button:hover{border-color:var(--accent);color:var(--accent);}
   .date-display{font-size:15px;font-weight:500;min-width:160px;text-align:center;}
   .timetable-outer{overflow-x:auto;border-radius:12px;border:.5px solid var(--gray-100);}
-
-  /* ── TIMETABLE: position:relative on the wrapper so labels attach to it ── */
   .tt-wrap{position:relative;}
   .tt-grid{min-width:620px;}
   .tt-head-row{display:flex;border-bottom:1px solid var(--gray-100);background:var(--gray-50);}
@@ -184,41 +200,17 @@
   .tt-cell.available:hover{background:var(--accent-light);}
   .tt-cell.taken{background:var(--gray-50);cursor:not-allowed;}
   .tt-cell.drag-selecting{background:rgba(48,96,184,.15);}
-
-  /* Mine cells: just fill + border, no label inside */
   .tt-cell.mine{background:var(--mine);cursor:pointer;}
   .tt-cell.mine.blk-top{border-top:2px solid var(--mine-bd)!important;border-left:2px solid var(--mine-bd)!important;border-right:2px solid var(--mine-bd)!important;border-bottom:none!important;border-radius:6px 6px 0 0;height:41px;}
   .tt-cell.mine.blk-mid{border-top:none!important;border-bottom:none!important;border-left:2px solid var(--mine-bd)!important;border-right:2px solid var(--mine-bd)!important;border-radius:0;margin-top:-1px;height:42px;}
   .tt-cell.mine.blk-bot{border-top:none!important;border-left:2px solid var(--mine-bd)!important;border-right:2px solid var(--mine-bd)!important;border-bottom:2px solid var(--mine-bd)!important;border-radius:0 0 6px 6px;margin-top:-1px;height:41px;}
   .tt-cell.mine.blk-solo{border:2px solid var(--mine-bd)!important;border-radius:6px;}
-
-  /*
-   * BLOCK LABEL: absolutely positioned on .tt-wrap (the grid container),
-   * NOT inside any cell or row. This completely bypasses overflow clipping.
-   * top/left/width/height all set by JS using getBoundingClientRect.
-   */
-  .block-overlay{
-    position:absolute;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    gap:2px;
-    pointer-events:none;
-    z-index:10;
-    padding:4px 20px 4px 4px;
-    text-align:center;
-  }
+  .block-overlay{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;pointer-events:none;z-index:10;padding:4px 20px 4px 4px;text-align:center;}
   .block-overlay .bl-type{font-size:12px;font-weight:500;color:#fff;white-space:nowrap;}
   .block-overlay .bl-with{font-size:10px;color:rgba(255,255,255,.88);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
   .block-overlay .bl-time{font-size:10px;color:rgba(255,255,255,.65);white-space:nowrap;}
-  .block-cancel-overlay{
-    position:absolute;
-    font-size:14px;line-height:1;cursor:pointer;
-    color:rgba(255,255,255,.85);
-    background:none;border:none;
-    z-index:11;padding:0;
-    pointer-events:all;
-  }
+  .block-cancel-overlay{position:absolute;font-size:14px;line-height:1;cursor:pointer;color:rgba(255,255,255,.85);background:none;border:none;z-index:11;padding:0;pointer-events:all;}
   .block-cancel-overlay:hover{color:#fff;}
-
   .legend{display:flex;gap:16px;margin-top:1rem;flex-wrap:wrap;}
   .legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--gray-700);}
   .legend-swatch{width:16px;height:16px;border-radius:4px;flex-shrink:0;}
@@ -346,31 +338,14 @@
       <div class="class-row" data-type="power"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Sled & Ski Drills</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">10 spots</span></div></div>
       <div class="class-row" data-type="hybrid"><div class="row-time">7:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">12 spots</span></div></div>
       <div class="class-row" data-type="endurance"><div class="row-time">8:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Zone 2 Foundations</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">14 spots</span></div></div>
-      <div class="session-label">Mid-Day</div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">11:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Running Intervals</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">12 spots</span></div></div>
-      <div class="class-row" data-type="power"><div class="row-time">12:00<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Roxzone Strength</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
       <div class="session-label">Evening</div>
       <div class="class-row" data-type="endurance"><div class="row-time">4:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Threshold Builder</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">9 spots</span></div></div>
       <div class="class-row" data-type="power"><div class="row-time">5:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Sled & Ski Drills</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-low">3 spots</span></div></div>
       <div class="class-row" data-type="hybrid"><div class="row-time">6:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">11 spots</span></div></div>
-      <div class="class-row" data-type="endurance"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Zone 2 Foundations</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">14 spots</span></div></div>
     </div>
-    <div class="day-group"><div class="day-label">Tuesday</div>
+    <div class="day-group"><div class="day-label">Tuesday – Friday</div>
       <div class="class-row" data-type="endurance"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Threshold Builder</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">9 spots</span></div></div>
       <div class="class-row" data-type="power"><div class="row-time">7:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Roxzone Strength</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
-      <div class="class-row special-row" data-type="special"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag tag-special">S8 Special</div><div class="row-name">Members vs Coaches</div><div class="row-meta"><span>75 min</span><span>Full Staff</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">16 spots</span></div></div>
-    </div>
-    <div class="day-group"><div class="day-label">Wednesday</div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">10 spots</span></div></div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">12:00<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Running Intervals</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn full" disabled>Full</button><span class="spots-pill spots-full">0 spots</span></div></div>
-      <div class="class-row" data-type="power"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Sled & Ski Drills</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">6 spots</span></div></div>
-    </div>
-    <div class="day-group"><div class="day-label">Thursday</div>
-      <div class="class-row" data-type="power"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Roxzone Strength</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
-      <div class="class-row special-row" data-type="special"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag tag-special">S8 Special</div><div class="row-name">The S8 Challenge</div><div class="row-meta"><span>75 min</span><span>All Coaches</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">20 spots</span></div></div>
-    </div>
-    <div class="day-group"><div class="day-label">Friday</div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Running Intervals</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">12 spots</span></div></div>
       <div class="class-row special-row" data-type="special"><div class="row-time">5:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag tag-special">S8 Special</div><div class="row-name">Benchmark Friday</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
     </div>
     <div class="day-group"><div class="day-label">Saturday & Sunday</div>
@@ -401,8 +376,8 @@
     <div class="meet-header"><h2>MEET <span>STATION8</span></h2><p>The coaches behind every class, every race plan, and every PB.</p></div>
     <div class="coaches-grid">
       <div class="coach-card"><div class="coach-avatar" style="background:#dbeafe;color:#1e3a8a;">SL</div><div class="coach-info"><h3>Sarah Lindqvist</h3><div class="coach-role">Head Coach · Hyrox Specialist</div><p class="coach-bio">3x podium finisher. Race simulation, transitions, mental prep.</p><span class="coach-stat">Hyrox Pro</span><span class="coach-stat">PB: 1:02:14</span></div></div>
-      <div class="coach-card"><div class="coach-avatar" style="background:#e0e8f5;color:#0d2a5e;">MT</div><div class="coach-info"><h3>Mike Torres</h3><div class="coach-role">Strength & Conditioning Coach</div><p class="coach-bio">Former CrossFit Games competitor. Sled, ski erg, functional strength.</p><span class="coach-stat">NSCA-CSCS</span><span class="coach-stat">PB: 1:08:41</span></div></div>
-      <div class="coach-card"><div class="coach-avatar" style="background:#c8d8f0;color:#0d2a5e;">JK</div><div class="coach-info"><h3>Jess Kim</h3><div class="coach-role">Running & Endurance Coach</div><p class="coach-bio">Marathon qualifier. Pacing, threshold work, conditioning.</p><span class="coach-stat">RRCA Certified</span><span class="coach-stat">Sub-3hr Marathon</span></div></div>
+      <div class="coach-card"><div class="coach-avatar" style="background:#e0e8f5;color:#0d2a5e;">MT</div><div class="coach-info"><h3>Mike Torres</h3><div class="coach-role">Strength & Conditioning</div><p class="coach-bio">Former CrossFit Games competitor. Sled, ski erg, functional strength.</p><span class="coach-stat">NSCA-CSCS</span><span class="coach-stat">PB: 1:08:41</span></div></div>
+      <div class="coach-card"><div class="coach-avatar" style="background:#c8d8f0;color:#0d2a5e;">JK</div><div class="coach-info"><h3>Jess Kim</h3><div class="coach-role">Running & Endurance</div><p class="coach-bio">Marathon qualifier. Pacing, threshold work, conditioning.</p><span class="coach-stat">RRCA Certified</span><span class="coach-stat">Sub-3hr Marathon</span></div></div>
     </div>
   </div>
 </div>
@@ -411,20 +386,46 @@
 <div class="page mobile-pad" id="page-results">
   <div class="results-section">
     <h1>RACE <span>RESULTS</span></h1>
-    <div style="background:#fff;border:.5px solid var(--gray-100);border-radius:12px;padding:1.25rem;margin-bottom:20px;">
-      <h3 style="font-size:14px;font-weight:500;margin-bottom:1rem;padding-bottom:10px;border-bottom:.5px solid var(--gray-100);">Studio leaderboard — Hyrox Open</h3>
-      <table class="results-table">
+
+    <!-- Leaderboard -->
+    <div class="results-card" style="margin-bottom:24px;">
+      <h3>Studio leaderboard — Hyrox Open</h3>
+      <table class="results-table" id="results-table">
         <thead><tr><th>Rank</th><th>Athlete</th><th>Division</th><th>Time</th><th>Event</th></tr></thead>
-        <tbody>
-          <tr><td><div class="rank-badge rank-1">1</div></td><td style="font-weight:500;">Sarah L.</td><td style="color:var(--gray-500);font-size:13px;">Women Open</td><td><span class="time-val">1:02:14</span><span class="pr-badge">PB</span></td><td style="font-size:13px;color:var(--gray-500);">Hamburg '25</td></tr>
-          <tr><td><div class="rank-badge rank-2">2</div></td><td style="font-weight:500;">Jordan S.</td><td style="color:var(--gray-500);font-size:13px;">Men Open</td><td><span class="time-val">1:14:22</span><span class="pr-badge">PB</span></td><td style="font-size:13px;color:var(--gray-500);">Chicago '25</td></tr>
-          <tr><td><div class="rank-badge rank-3">3</div></td><td style="font-weight:500;">Alex R.</td><td style="color:var(--gray-500);font-size:13px;">Men Open</td><td><span class="time-val">1:18:05</span></td><td style="font-size:13px;color:var(--gray-500);">Chicago '25</td></tr>
-          <tr><td><div class="rank-badge rank-other">4</div></td><td style="font-weight:500;">Maya P.</td><td style="color:var(--gray-500);font-size:13px;">Women Open</td><td><span class="time-val">1:19:44</span></td><td style="font-size:13px;color:var(--gray-500);">Dallas '25</td></tr>
-          <tr><td><div class="rank-badge rank-other">5</div></td><td style="font-weight:500;">Chris W.</td><td style="color:var(--gray-500);font-size:13px;">Men Pro</td><td><span class="time-val">1:21:30</span></td><td style="font-size:13px;color:var(--gray-500);">Dallas '25</td></tr>
-        </tbody>
+        <tbody id="results-tbody"></tbody>
       </table>
     </div>
-    <button class="btn-secondary" style="font-size:14px;padding:10px 20px;">+ Submit your race result</button>
+
+    <!-- Submit form -->
+    <div class="submit-card">
+      <h3>Submit your race result</h3>
+      <div class="submit-grid">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" id="sub-name" placeholder="Your name"/>
+        </div>
+        <div class="field">
+          <label>Division</label>
+          <select id="sub-division">
+            <option value="Men Open">Men Open</option>
+            <option value="Women Open">Women Open</option>
+            <option value="Men Pro">Men Pro</option>
+            <option value="Women Pro">Women Pro</option>
+            <option value="Mixed Doubles">Mixed Doubles</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Finish time (h:mm:ss)</label>
+          <input type="text" id="sub-time" placeholder="1:14:22" maxlength="7"/>
+        </div>
+        <div class="field">
+          <label>Event</label>
+          <input type="text" id="sub-event" placeholder="e.g. Chicago '25"/>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="submitResult()">Add to Leaderboard</button>
+      <div class="submit-success" id="submit-success">Result added! 🎉</div>
+    </div>
   </div>
 </div>
 
@@ -438,7 +439,6 @@
     <div class="timetable-outer">
       <div class="tt-wrap">
         <div class="tt-grid" id="tt-grid"></div>
-        <!-- block overlays injected here by JS -->
       </div>
     </div>
     <div class="legend" style="margin-top:1rem;">
@@ -467,6 +467,7 @@
 </div>
 
 <script>
+// ── NAV ──
 const tabMap={home:'tab-home',classes:'tab-classes',reserve:'tab-reserve',about:'tab-about',dashboard:'tab-dashboard',results:'tab-results',signin:'tab-home'};
 function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');window.scrollTo(0,0);const tId=tabMap[id]||'tab-home';document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));const at=document.getElementById(tId);if(at){at.classList.add('active');updateInd(at);}}
 function updateInd(tab){const ind=document.getElementById('tab-indicator'),bar=document.querySelector('.bottom-tabs-inner');if(!ind||!bar)return;const br=bar.getBoundingClientRect(),tr=tab.getBoundingClientRect();ind.style.left=(tr.left-br.left)+'px';ind.style.width=tr.width+'px';}
@@ -474,150 +475,131 @@ function doSignIn(){document.getElementById('main-nav').style.display='none';doc
 function bookClass(btn){if(btn.classList.contains('booked')||btn.classList.contains('full'))return;btn.textContent='Booked ✓';btn.classList.add('booked');}
 function applyFilter(type){document.querySelectorAll('.filter-chip').forEach(c=>{c.classList.remove('active','active-special');if(c.dataset.filter===type)c.classList.add(type==='special'?'active-special':'active');});document.getElementById('clear-btn').classList.toggle('visible',type!=='all');document.querySelectorAll('.class-row').forEach(row=>{if(type==='all'){row.classList.remove('dimmed','highlighted');}else if(row.dataset.type===type){row.classList.remove('dimmed');row.classList.add('highlighted');}else{row.classList.remove('highlighted');row.classList.add('dimmed');}});}
 
-const LANES=5,START_H=6,END_H=21,TOTAL=(END_H-START_H)*2;
-const ROW_H=40; // px per slot row (base)
-const HEAD_H=46; // header row height
+// ── RESULTS ──
+// Parse "h:mm:ss" or "m:ss" into total seconds for sorting
+function parseTime(t){const p=t.split(':').map(Number);if(p.length===3)return p[0]*3600+p[1]*60+p[2];if(p.length===2)return p[0]*60+p[1];return 0;}
 
+let raceResults=[
+  {name:'Sarah L.',division:'Women Open',time:'1:02:14',event:"Hamburg '25"},
+  {name:'Jordan S.',division:'Men Open',  time:'1:14:22',event:"Chicago '25"},
+  {name:'Alex R.',  division:'Men Open',  time:'1:18:05',event:"Chicago '25"},
+  {name:'Maya P.',  division:'Women Open',time:'1:19:44',event:"Dallas '25"},
+  {name:'Chris W.', division:'Men Pro',   time:'1:21:30',event:"Dallas '25"},
+];
+
+function rankClass(r){if(r===1)return 'rank-1';if(r===2)return 'rank-2';if(r===3)return 'rank-3';return 'rank-other';}
+
+function renderResults(){
+  // Sort by time ascending
+  const sorted=[...raceResults].sort((a,b)=>parseTime(a.time)-parseTime(b.time));
+  const tbody=document.getElementById('results-tbody');
+  tbody.innerHTML='';
+  sorted.forEach((r,i)=>{
+    const rank=i+1;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><div class="rank-badge ${rankClass(rank)}">${rank}</div></td>
+      <td style="font-weight:500;">${r.name}</td>
+      <td style="color:var(--gray-500);font-size:13px;">${r.division}</td>
+      <td><span class="time-val">${r.time}</span></td>
+      <td style="font-size:13px;color:var(--gray-500);">${r.event}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function submitResult(){
+  const name=document.getElementById('sub-name').value.trim();
+  const division=document.getElementById('sub-division').value;
+  const time=document.getElementById('sub-time').value.trim();
+  const event=document.getElementById('sub-event').value.trim();
+
+  // Basic validation
+  if(!name){document.getElementById('sub-name').focus();return;}
+  if(!time||!/^\d+:\d{2}(:\d{2})?$/.test(time)){document.getElementById('sub-time').focus();return;}
+  if(!event){document.getElementById('sub-event').focus();return;}
+
+  raceResults.push({name,division,time,event});
+  renderResults();
+
+  // Clear form
+  document.getElementById('sub-name').value='';
+  document.getElementById('sub-time').value='';
+  document.getElementById('sub-event').value='';
+
+  // Show success flash
+  const suc=document.getElementById('submit-success');
+  suc.style.display='block';
+  setTimeout(()=>{suc.style.display='none';},3000);
+}
+
+// Allow Enter key to submit
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&document.getElementById('page-results').classList.contains('active')){
+    const active=document.activeElement;
+    if(active&&['sub-name','sub-time','sub-event'].includes(active.id))submitResult();
+  }
+});
+
+// ── TIMETABLE ──
+const LANES=5,START_H=6,END_H=21,TOTAL=(END_H-START_H)*2;
 function slotLabel(i){const m=START_H*60+i*30,h=Math.floor(m/60),mn=m%60,ap=h<12?'AM':'PM',h12=h===0?12:h>12?h-12:h;return mn===0?`${h12}:00 ${ap}`:`${h12}:30`;}
 function slotTime(i){const m=START_H*60+i*30,h=Math.floor(m/60),mn=m%60,ap=h<12?'AM':'PM',h12=h===0?12:h>12?h-12:h;return`${h12}:${mn===0?'00':'30'} ${ap}`;}
 function rangeInfo(s,e){const from=slotTime(s),em=START_H*60+(e+1)*30,eh=Math.floor(em/60),emn=em%60,ap=eh<12?'AM':'PM',h12=eh===0?12:eh>12?eh-12:eh,to=`${h12}:${emn===0?'00':'30'} ${ap}`,dur=(e-s+1)*30,ds=dur<60?`${dur} min`:dur%60===0?`${dur/60} hr`:`${Math.floor(dur/60)}h ${dur%60}m`;return{from,to,dur:ds};}
-
 let currentDay=new Date(2026,2,16),reservations={},drag={active:false,lane:-1,startSlot:-1,endSlot:-1};
 function fmtKey(d){return d.toISOString().split('T')[0];}
 function fmtDisplay(d){return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
 function changeDay(dir){currentDay=new Date(currentDay);currentDay.setDate(currentDay.getDate()+dir);document.getElementById('date-display').textContent=fmtDisplay(currentDay);buildGrid();}
-function seedTaken(){
-  [[new Date(2026,2,16),[[0,2,5],[1,4,7],[2,8,9],[3,0,3],[4,14,17],[0,10,12],[1,18,21]]],
-   [new Date(2026,2,17),[[0,6,9],[2,2,5],[3,12,15],[4,18,21]]],
-   [new Date(2026,2,18),[[1,4,7],[3,8,11],[0,16,19]]]].forEach(([d,seeds])=>{
-    const dk=fmtKey(d);seeds.forEach(([l,s,e])=>{reservations[`${dk}-${l}-${s}-${e}`]={mine:false};});
-  });
-}
+function seedTaken(){[[new Date(2026,2,16),[[0,2,5],[1,4,7],[2,8,9],[3,0,3],[4,14,17],[0,10,12],[1,18,21]]],[new Date(2026,2,17),[[0,6,9],[2,2,5],[3,12,15],[4,18,21]]],[new Date(2026,2,18),[[1,4,7],[3,8,11],[0,16,19]]]].forEach(([d,seeds])=>{const dk=fmtKey(d);seeds.forEach(([l,s,e])=>{reservations[`${dk}-${l}-${s}-${e}`]={mine:false};});});}
 function getOcc(dk,lane){const o=new Set();Object.keys(reservations).forEach(k=>{const p=k.split('-'),kdk=p.slice(0,3).join('-'),[kl,ks,ke]=[+p[3],+p[4],+p[5]];if(kdk===dk&&kl===lane)for(let i=ks;i<=ke;i++)o.add(i);});return o;}
 function findRes(dk,lane,slot){return Object.keys(reservations).find(k=>{const p=k.split('-');return p.slice(0,3).join('-')===dk&&+p[3]===lane&&slot>=+p[4]&&slot<=+p[5];})||null;}
-
 function buildGrid(){
   const dk=fmtKey(currentDay);
   const wrap=document.querySelector('.tt-wrap');
-  // Remove existing overlays
   wrap.querySelectorAll('.block-overlay,.block-cancel-overlay').forEach(el=>el.remove());
-
   const grid=document.getElementById('tt-grid');grid.innerHTML='';
-
-  // Header
   const hdr=document.createElement('div');hdr.className='tt-head-row';
   const ht=document.createElement('div');ht.className='tt-head-time';hdr.appendChild(ht);
   for(let l=0;l<LANES;l++){const lh=document.createElement('div');lh.className='tt-head-lane';lh.textContent=`LANE ${l+1}`;hdr.appendChild(lh);}
   grid.appendChild(hdr);
-
-  // Rows
   for(let si=0;si<TOTAL;si++){
-    const row=document.createElement('div');
-    row.className='tt-row'+(si%2===1?' half-hour':'');
-    if(si===TOTAL-1)row.style.borderBottom='none';
+    const row=document.createElement('div');row.className='tt-row'+(si%2===1?' half-hour':'');if(si===TOTAL-1)row.style.borderBottom='none';
     const tc=document.createElement('div');tc.className='tt-time';tc.textContent=si%2===0?slotLabel(si):'';row.appendChild(tc);
     for(let l=0;l<LANES;l++){
-      const occ=getOcc(dk,l);
-      const cell=document.createElement('div');cell.className='tt-cell';cell.dataset.lane=l;cell.dataset.slot=si;
-      if(occ.has(si)){
-        const rk=findRes(dk,l,si),res=rk?reservations[rk]:null;
-        if(res&&res.mine){
-          const parts=rk.split('-'),ks=+parts[4],ke=+parts[5];
-          cell.classList.add('mine');
-          if(ks===ke)      cell.classList.add('blk-solo');
-          else if(si===ks) cell.classList.add('blk-top');
-          else if(si===ke) cell.classList.add('blk-bot');
-          else             cell.classList.add('blk-mid');
-        } else {
-          cell.classList.add('taken');
-        }
-      } else {
-        cell.classList.add('available');
-      }
-      cell.addEventListener('mousedown',onDown);
-      cell.addEventListener('mouseover',onOver);
-      cell.addEventListener('touchstart',onTS,{passive:true});
-      cell.addEventListener('touchmove',onTM,{passive:false});
-      row.appendChild(cell);
+      const occ=getOcc(dk,l),cell=document.createElement('div');cell.className='tt-cell';cell.dataset.lane=l;cell.dataset.slot=si;
+      if(occ.has(si)){const rk=findRes(dk,l,si),res=rk?reservations[rk]:null;if(res&&res.mine){const p=rk.split('-'),ks=+p[4],ke=+p[5];cell.classList.add('mine');if(ks===ke)cell.classList.add('blk-solo');else if(si===ks)cell.classList.add('blk-top');else if(si===ke)cell.classList.add('blk-bot');else cell.classList.add('blk-mid');}else{cell.classList.add('taken');}}
+      else{cell.classList.add('available');}
+      cell.addEventListener('mousedown',onDown);cell.addEventListener('mouseover',onOver);cell.addEventListener('touchstart',onTS,{passive:true});cell.addEventListener('touchmove',onTM,{passive:false});row.appendChild(cell);
     }
     grid.appendChild(row);
   }
-
-  document.removeEventListener('mouseup',onUp);document.addEventListener('mouseup',onUp);
-  document.removeEventListener('touchend',onTE);document.addEventListener('touchend',onTE);
-
-  // After DOM is built, position overlay labels using getBoundingClientRect
+  document.removeEventListener('mouseup',onUp);document.addEventListener('mouseup',onUp);document.removeEventListener('touchend',onTE);document.addEventListener('touchend',onTE);
   requestAnimationFrame(()=>placeOverlays(dk,wrap));
 }
-
 function placeOverlays(dk,wrap){
-  const wrapRect=wrap.getBoundingClientRect();
-  // Find all mine blocks (keyed by lane+startSlot)
-  const placed=new Set();
+  const wrapRect=wrap.getBoundingClientRect(),placed=new Set();
   Object.keys(reservations).forEach(key=>{
-    const p=key.split('-'),kdk=p.slice(0,3).join('-');
-    if(kdk!==dk)return;
-    const res=reservations[key];
-    if(!res.mine)return;
-    const lane=+p[3],ks=+p[4],ke=+p[5];
-    const blockKey=`${lane}-${ks}`;
-    if(placed.has(blockKey))return;
-    placed.add(blockKey);
-
-    // Find the top cell and bottom cell elements
+    const p=key.split('-'),kdk=p.slice(0,3).join('-');if(kdk!==dk)return;
+    const res=reservations[key];if(!res.mine)return;
+    const lane=+p[3],ks=+p[4],ke=+p[5],blockKey=`${lane}-${ks}`;
+    if(placed.has(blockKey))return;placed.add(blockKey);
     const topCell=wrap.querySelector(`.tt-cell[data-lane="${lane}"][data-slot="${ks}"]`);
     const botCell=wrap.querySelector(`.tt-cell[data-lane="${lane}"][data-slot="${ke}"]`);
     if(!topCell||!botCell)return;
-
-    const topR=topCell.getBoundingClientRect();
-    const botR=botCell.getBoundingClientRect();
-
-    const top=topR.top-wrapRect.top;
-    const left=topR.left-wrapRect.left;
-    const width=topR.width;
-    const height=botR.bottom-topR.top;
-
+    const topR=topCell.getBoundingClientRect(),botR=botCell.getBoundingClientRect();
+    const top=topR.top-wrapRect.top,left=topR.left-wrapRect.left,width=topR.width,height=botR.bottom-topR.top;
     const r=rangeInfo(ks,ke);
-    const lbl=document.createElement('div');
-    lbl.className='block-overlay';
-    lbl.style.top=top+'px';
-    lbl.style.left=left+'px';
-    lbl.style.width=width+'px';
-    lbl.style.height=height+'px';
-
-    const typeEl=document.createElement('span');typeEl.className='bl-type';
-    typeEl.textContent=res.type==='single'?'Single':res.type==='doubles'?'Doubles':'Relay';
-    lbl.appendChild(typeEl);
-
-    if(res.type==='doubles'){
-      const plist=(res.partners||[]).filter(Boolean);
-      const wEl=document.createElement('span');wEl.className='bl-with';
-      wEl.textContent=plist.length?`with ${plist[0].split(' ')[0]}`:'with partner';
-      lbl.appendChild(wEl);
-    } else if(res.type==='relay'){
-      const names=(res.partners||[]).filter(Boolean).map(p=>p.split(' ')[0]);
-      const wEl=document.createElement('span');wEl.className='bl-with';
-      wEl.textContent=names.length?`with ${names.join(', ')}`:'with teammates';
-      lbl.appendChild(wEl);
-    }
-
-    const tEl=document.createElement('span');tEl.className='bl-time';
-    tEl.textContent=`${r.from}–${r.to}`;
-    lbl.appendChild(tEl);
-
+    const lbl=document.createElement('div');lbl.className='block-overlay';
+    lbl.style.cssText=`top:${top}px;left:${left}px;width:${width}px;height:${height}px;`;
+    const typeEl=document.createElement('span');typeEl.className='bl-type';typeEl.textContent=res.type==='single'?'Single':res.type==='doubles'?'Doubles':'Relay';lbl.appendChild(typeEl);
+    if(res.type==='doubles'){const ps=(res.partners||[]).filter(Boolean);const w=document.createElement('span');w.className='bl-with';w.textContent=ps.length?`with ${ps[0].split(' ')[0]}`:'with partner';lbl.appendChild(w);}
+    else if(res.type==='relay'){const ns=(res.partners||[]).filter(Boolean).map(x=>x.split(' ')[0]);const w=document.createElement('span');w.className='bl-with';w.textContent=ns.length?`with ${ns.join(', ')}`:'with teammates';lbl.appendChild(w);}
+    const tEl=document.createElement('span');tEl.className='bl-time';tEl.textContent=`${r.from}–${r.to}`;lbl.appendChild(tEl);
     wrap.appendChild(lbl);
-
-    // Cancel button — also attached to wrap, top-right corner of block
-    const cb=document.createElement('button');
-    cb.className='block-cancel-overlay';
-    cb.style.top=(top+4)+'px';
-    cb.style.left=(left+width-20)+'px';
-    cb.textContent='×';
-    cb.addEventListener('click',()=>{delete reservations[key];buildGrid();});
-    wrap.appendChild(cb);
+    const cb=document.createElement('button');cb.className='block-cancel-overlay';cb.style.cssText=`top:${top+4}px;left:${left+width-20}px;`;cb.textContent='×';
+    cb.addEventListener('click',()=>{delete reservations[key];buildGrid();});wrap.appendChild(cb);
   });
 }
-
 function onDown(e){const c=e.currentTarget,l=+c.dataset.lane,s=+c.dataset.slot;if(getOcc(fmtKey(currentDay),l).has(s))return;e.preventDefault();drag={active:true,lane:l,startSlot:s,endSlot:s};updatePreview();}
 function onOver(e){if(!drag.active)return;const c=e.currentTarget,l=+c.dataset.lane,s=+c.dataset.slot;if(l!==drag.lane)return;const occ=getOcc(fmtKey(currentDay),l);let end=s;if(s>=drag.startSlot){for(let i=drag.startSlot;i<=s;i++){if(occ.has(i)){end=i-1;break;}}}else{for(let i=drag.startSlot;i>=s;i--){if(occ.has(i)){end=i+1;break;}}}drag.endSlot=end;updatePreview();}
 function onUp(){if(!drag.active)return;drag.active=false;clearPreview();const s=Math.min(drag.startSlot,drag.endSlot),e=Math.max(drag.startSlot,drag.endSlot);if(s>=0&&e>=s)openModal(drag.lane,s,e);}
@@ -627,7 +609,6 @@ function onTM(e){e.preventDefault();const c=getTC(e);if(!c||!drag.active||+c.dat
 function onTE(){if(!drag.active)return;drag.active=false;clearPreview();const s=Math.min(drag.startSlot,drag.endSlot),e=Math.max(drag.startSlot,drag.endSlot);if(s>=0&&e>=s)openModal(drag.lane,s,e);}
 function updatePreview(){const s=Math.min(drag.startSlot,drag.endSlot),e=Math.max(drag.startSlot,drag.endSlot);document.querySelectorAll('.tt-cell').forEach(c=>{c.classList.remove('drag-selecting');const l=+c.dataset.lane,si=+c.dataset.slot;if(drag.active&&l===drag.lane&&si>=s&&si<=e&&!c.classList.contains('taken')&&!c.classList.contains('mine'))c.classList.add('drag-selecting');});}
 function clearPreview(){document.querySelectorAll('.tt-cell.drag-selecting').forEach(c=>c.classList.remove('drag-selecting'));}
-
 const MEMBERS=['Alex Rivera','Maya Patel','Chris Wong','Sam Lee','Taylor Brooks','Casey Kim','Morgan Davis','Jamie Chen','Riley Foster','Drew Parker'];
 let modalState={lane:-1,startSlot:-1,endSlot:-1,type:null,partners:[]};
 const PNEEDED={single:0,doubles:1,relay:3};
@@ -642,6 +623,8 @@ function remP(idx){modalState.partners.splice(idx,1);renderP(PNEEDED[modalState.
 function checkC(){document.getElementById('modal-confirm').disabled=modalState.partners.filter(Boolean).length<(PNEEDED[modalState.type]||0);}
 function confirmReservation(){const dk=fmtKey(currentDay),key=`${dk}-${modalState.lane}-${modalState.startSlot}-${modalState.endSlot}`;reservations[key]={mine:true,type:modalState.type,partners:[...modalState.partners]};closeModal();buildGrid();}
 
+// Init
+renderResults();
 seedTaken();
 document.getElementById('date-display').textContent=fmtDisplay(currentDay);
 buildGrid();
