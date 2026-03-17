@@ -1,262 +1,291 @@
+
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap');
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --black: #0e0e0e; --white: #ffffff;
-    --gray-50: #f7f7f5; --gray-100: #ebebea;
-    --gray-300: #b4b2a9; --gray-500: #888780;
-    --gray-700: #444441; --accent: #d85a30;
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{--black:#0e0e0e;--white:#fff;--gray-50:#f5f6f8;--gray-100:#e8eaee;--gray-300:#adb3be;--gray-500:#7a8494;--gray-700:#3f4654;--accent:#3060b8;--accent-dark:#1e4a9a;--accent-light:#e8eef8;--tab-h:64px;--mine:#3060b8;--mine-bd:#0d1a3a;}
+  html,body{font-family:'DM Sans',sans-serif;background:#fff;color:#0e0e0e;font-size:17px;}
+  .page{display:none;}.page.active{display:block;}
+  .top-nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:68px;background:rgba(255,255,255,.97);border-bottom:.5px solid var(--gray-100);backdrop-filter:blur(8px);}
+  .nav-left{display:flex;flex-direction:column;gap:2px;cursor:pointer;}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;line-height:1;}
+  .nav-logo span{color:var(--accent);}
+  .nav-partner{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray-500);}
+  .nav-partner em{color:var(--accent);font-style:normal;}
+  .nav-links{display:flex;gap:2rem;align-items:center;}
+  .nav-links a{font-size:15px;color:var(--gray-700);text-decoration:none;cursor:pointer;}
+  .nav-links a:hover{color:var(--black);}
+  .nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:6px;}
+  .nav-user{display:flex;align-items:center;gap:12px;}
+  .avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#fff;cursor:pointer;}
+  .bottom-tabs{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;height:var(--tab-h);background:rgba(255,255,255,.98);border-top:.5px solid var(--gray-100);}
+  .bottom-tabs-inner{display:flex;height:100%;position:relative;}
+  .tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;background:none;border:none;font-family:'DM Sans';color:var(--gray-500);padding:0;}
+  .tab-btn.active{color:var(--accent);}
+  .tab-btn svg{width:20px;height:20px;stroke-width:1.6;}
+  .tab-btn span{font-size:9px;font-weight:500;}
+  .tab-indicator{position:absolute;top:0;height:2px;background:var(--accent);border-radius:0 0 2px 2px;transition:left .2s,width .2s;}
+  .mobile-pad{padding-bottom:80px;}
+  @media(max-width:680px){
+    .top-nav .nav-links,.top-nav .nav-user{display:none!important;}
+    .bottom-tabs{display:block;}
+    .mobile-pad{padding-bottom:calc(var(--tab-h)+16px);}
+    .hero{grid-template-columns:1fr!important;padding:2rem 1.25rem!important;min-height:auto!important;}
+    .hero-visual{display:none!important;}
+    .about-intro{grid-template-columns:1fr!important;gap:1.5rem!important;}
+    .values-grid,.coaches-grid{grid-template-columns:1fr!important;}
+    .results-table th:nth-child(3),.results-table td:nth-child(3),.results-table th:nth-child(5),.results-table td:nth-child(5){display:none;}
+    .class-row{grid-template-columns:60px 1fr auto!important;padding:10px 12px!important;}
+    .schedule-page,.about-page,.results-section{padding-left:1.25rem!important;padding-right:1.25rem!important;}
+    .reserve-page{padding:1rem .75rem 5rem!important;}
+    .reserve-header{flex-direction:column!important;align-items:flex-start!important;}
   }
-  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--black); font-size: 17px; }
-  .page { display: none; }
-  .page.active { display: block; }
-
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem; height: 68px;
-    background: rgba(255,255,255,0.96);
-    border-bottom: 0.5px solid var(--gray-100);
-    backdrop-filter: blur(8px);
+  @media(min-width:681px) and (max-width:900px){
+    .hero{grid-template-columns:1fr!important;min-height:auto!important;}
+    .hero-visual{display:none!important;}
+    .about-intro{grid-template-columns:1fr!important;}
+    .values-grid{grid-template-columns:1fr 1fr!important;}
+    .coaches-grid{grid-template-columns:1fr 1fr!important;}
   }
-  .nav-left { display: flex; flex-direction: column; gap: 2px; }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; color: var(--black); cursor: pointer; line-height: 1; }
-  .nav-logo span { color: var(--accent); }
-  .nav-partner { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-500); font-weight: 500; }
-  .nav-partner em { color: var(--accent); font-style: normal; }
-  .nav-links { display: flex; gap: 2rem; align-items: center; }
-  .nav-links a { font-size: 15px; color: var(--gray-700); text-decoration: none; cursor: pointer; letter-spacing: 0.3px; }
-  .nav-links a:hover { color: var(--black); }
-  .nav-cta { background: var(--black); color: var(--white) !important; padding: 8px 20px; border-radius: 6px; font-size: 15px !important; }
-  .nav-user { display: flex; align-items: center; gap: 12px; }
-  .avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: white; cursor: pointer; }
+  .btn-primary{background:var(--accent);color:#fff;border:none;padding:14px 30px;border-radius:8px;font-family:'DM Sans';font-size:15px;font-weight:500;cursor:pointer;}
+  .btn-primary:hover{background:var(--accent-dark);}
+  .btn-secondary{background:transparent;color:var(--black);border:1px solid var(--gray-300);padding:14px 30px;border-radius:8px;font-family:'DM Sans';font-size:15px;cursor:pointer;}
+  .btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+  .hero{min-height:calc(100vh - 68px);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 2rem;gap:3rem;max-width:1200px;margin:0 auto;}
+  .hero-text h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,8vw,108px);line-height:.95;letter-spacing:2px;margin-bottom:1.5rem;}
+  .hero-text h1 span{color:var(--accent);}
+  .hero-text p{font-size:17px;color:var(--gray-700);line-height:1.7;max-width:420px;margin-bottom:2rem;}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+  .hero-stats{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:.5px solid var(--gray-100);}
+  .stat-val{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;color:var(--accent);}
+  .stat-label{font-size:13px;color:var(--gray-500);text-transform:uppercase;letter-spacing:1px;}
+  .hero-visual{display:flex;flex-direction:column;gap:16px;}
+  .home-class-card{background:var(--gray-50);border:.5px solid var(--gray-100);border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;}
+  .home-class-card.featured{background:var(--accent);border-color:var(--accent);}
+  .hci h3{font-size:15px;font-weight:500;margin-bottom:3px;}
+  .home-class-card.featured .hci h3{color:#fff;}
+  .hci-meta{font-size:12px;color:var(--gray-500);display:flex;gap:10px;}
+  .home-class-card.featured .hci-meta{color:rgba(255,255,255,.7);}
+  .spots-badge{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:500;white-space:nowrap;}
+  .spots-open{background:#e8f4ee;color:#1d6a3a;}
+  .spots-low{background:#fef3e2;color:#8a5a00;}
+  .spots-full{background:var(--gray-100);color:var(--gray-500);}
+  .signin-wrap{min-height:calc(100vh - 68px);display:flex;align-items:center;justify-content:center;padding:2rem;background:var(--gray-50);}
+  .signin-card{background:#fff;border:.5px solid var(--gray-100);border-radius:16px;padding:2.5rem;width:100%;max-width:420px;}
+  .signin-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;text-align:center;margin-bottom:.5rem;}
+  .signin-logo span{color:var(--accent);}
+  .signin-sub{font-size:14px;color:var(--gray-500);text-align:center;margin-bottom:2rem;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:13px;color:var(--gray-700);margin-bottom:6px;font-weight:500;}
+  .field input{width:100%;padding:11px 14px;border:.5px solid var(--gray-300);border-radius:8px;font-family:'DM Sans';font-size:15px;outline:none;}
+  .field input:focus{border-color:var(--accent);}
+  .btn-full{width:100%;padding:13px;border-radius:8px;font-family:'DM Sans';font-size:15px;font-weight:500;cursor:pointer;margin-top:6px;}
+  .btn-signin{background:var(--accent);color:#fff;border:none;}
+  .signin-footer{text-align:center;margin-top:1.5rem;font-size:14px;color:var(--gray-500);}
+  .signin-footer a{color:var(--accent);cursor:pointer;text-decoration:none;font-weight:500;}
+  .schedule-page{max-width:860px;margin:0 auto;padding:2.5rem 2rem 5rem;}
+  .schedule-page>h1{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:1px;margin-bottom:1.5rem;}
+  .schedule-page>h1 span{color:var(--accent);}
+  .filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:2rem;}
+  .filter-chip{padding:7px 15px;border-radius:100px;font-size:13px;font-weight:500;border:1px solid var(--gray-100);cursor:pointer;font-family:'DM Sans';background:#fff;color:var(--gray-700);white-space:nowrap;}
+  .filter-chip:hover{border-color:var(--accent);color:var(--accent);}
+  .filter-chip.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .filter-chip.active-special{background:#1a4a8a;color:#fff;border-color:#1a4a8a;}
+  .filter-clear{padding:7px 14px;border-radius:100px;font-size:13px;border:1px dashed var(--gray-300);cursor:pointer;font-family:'DM Sans';background:transparent;color:var(--accent);display:none;}
+  .filter-clear.visible{display:block;}
+  .day-group{margin-bottom:2.5rem;}
+  .day-label{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+  .session-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gray-500);font-weight:500;margin:14px 0 8px 4px;}
+  .class-row{display:grid;grid-template-columns:76px 1fr auto;align-items:center;gap:14px;padding:13px 16px;border-radius:10px;border:.5px solid var(--gray-100);margin-bottom:7px;background:#fff;transition:opacity .18s,border-color .18s;}
+  .class-row:hover:not(.dimmed){border-color:var(--accent);}
+  .class-row.dimmed{opacity:.22;pointer-events:none;}
+  .class-row.highlighted{border-color:var(--accent);background:var(--accent-light);}
+  .class-row.special-row{border-left:3px solid #1a4a8a;}
+  .class-row.highlighted.special-row{border-color:#1a4a8a;background:#e0e8f5;}
+  .row-time{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;line-height:1.1;}
+  .row-time-ampm{font-size:11px;font-family:'DM Sans';color:var(--gray-500);font-weight:400;display:block;}
+  .row-time-dur{font-size:10px;font-family:'DM Sans';color:var(--gray-300);display:block;}
+  .row-info{min-width:0;}
+  .row-tag{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);font-weight:500;margin-bottom:2px;}
+  .row-tag.tag-special{color:#1a4a8a;}
+  .row-name{font-size:15px;font-weight:500;margin-bottom:3px;}
+  .row-meta{font-size:12px;color:var(--gray-500);display:flex;gap:10px;flex-wrap:wrap;}
+  .row-action{display:flex;flex-direction:column;align-items:flex-end;gap:5px;min-width:90px;}
+  .book-btn{padding:8px 14px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:'DM Sans';font-size:13px;cursor:pointer;font-weight:500;white-space:nowrap;width:100%;text-align:center;}
+  .book-btn:hover:not(:disabled){background:var(--accent-dark);}
+  .book-btn.booked{background:#1d6a3a;cursor:default;}
+  .book-btn.full{background:var(--gray-100);color:var(--gray-500);cursor:default;}
+  .spots-pill{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500;white-space:nowrap;text-align:center;width:100%;}
+  .class-row.mock-race-row{background:#0d2a5e;border-color:#0d2a5e;}
+  .class-row.mock-race-row .row-time,.class-row.mock-race-row .row-name{color:#fff;}
+  .class-row.mock-race-row .row-time-ampm{color:rgba(255,255,255,.5);}
+  .class-row.mock-race-row .row-tag{color:#7aaef0;}
+  .class-row.mock-race-row .row-meta{color:rgba(255,255,255,.55);}
+  .class-row.mock-race-row .book-btn{background:#fff;color:#0d2a5e;}
+  .about-page{max-width:1000px;margin:0 auto;padding:3rem 2rem 5rem;}
+  .about-intro{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:3.5rem;}
+  .about-intro h2{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:1px;line-height:.95;margin-bottom:1.5rem;}
+  .about-intro h2 span{color:var(--accent);}
+  .about-intro p{font-size:16px;color:var(--gray-700);line-height:1.8;margin-bottom:1rem;}
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:3.5rem;}
+  .value-card{padding:1.25rem;background:var(--accent-light);border-radius:12px;border:.5px solid #c8d8f0;}
+  .value-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--accent);letter-spacing:1px;margin-bottom:6px;}
+  .value-title{font-size:15px;font-weight:500;margin-bottom:6px;}
+  .value-desc{font-size:13px;color:var(--gray-700);line-height:1.7;}
+  .about-divider{height:.5px;background:var(--gray-100);margin:0 0 3rem;}
+  .meet-header{margin-bottom:1.75rem;}
+  .meet-header h2{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:1px;}
+  .meet-header h2 span{color:var(--accent);}
+  .meet-header p{font-size:14px;color:var(--gray-500);margin-top:5px;}
+  .coaches-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .coach-card{border:.5px solid var(--gray-100);border-radius:12px;overflow:hidden;}
+  .coach-avatar{height:150px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:2px;}
+  .coach-info{padding:14px 16px;}
+  .coach-info h3{font-size:16px;font-weight:500;}
+  .coach-role{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin:3px 0 7px;}
+  .coach-bio{font-size:13px;color:var(--gray-700);line-height:1.6;}
+  .coach-stat{display:inline-block;font-size:11px;background:var(--accent-light);color:var(--accent-dark);padding:3px 9px;border-radius:20px;margin-top:7px;margin-right:4px;}
+  .results-section{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem;}
+  .results-section h1{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:1px;margin-bottom:1.5rem;}
+  .results-section h1 span{color:var(--accent);}
+  .results-table{width:100%;border-collapse:collapse;font-size:15px;margin-bottom:1.5rem;}
+  .results-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--gray-500);padding:0 14px 12px;border-bottom:.5px solid var(--gray-100);}
+  .results-table td{padding:13px 14px;border-bottom:.5px solid var(--gray-100);}
+  .results-table tr:last-child td{border-bottom:none;}
+  .results-table tr:hover td{background:var(--accent-light);}
+  .rank-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;}
+  .rank-1{background:#fef3e2;color:#8a5a00;}.rank-2{background:var(--gray-100);color:var(--gray-700);}.rank-3{background:var(--accent-light);color:var(--accent-dark);}.rank-other{background:var(--gray-50);color:var(--gray-500);}
+  .time-val{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--accent);}
+  .pr-badge{font-size:11px;background:#e8f4ee;color:#1d6a3a;padding:2px 8px;border-radius:20px;margin-left:6px;font-weight:500;}
+  .reserve-page{max-width:1100px;margin:0 auto;padding:2.5rem 2rem 5rem;}
+  .reserve-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
+  .reserve-header h1{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:1px;}
+  .reserve-header h1 span{color:var(--accent);}
+  .reserve-header p{font-size:14px;color:var(--gray-500);margin-top:4px;}
+  .date-nav{display:flex;align-items:center;gap:12px;}
+  .date-nav button{width:36px;height:36px;border-radius:50%;border:.5px solid var(--gray-300);background:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--gray-700);}
+  .date-nav button:hover{border-color:var(--accent);color:var(--accent);}
+  .date-display{font-size:15px;font-weight:500;min-width:160px;text-align:center;}
+  .timetable-outer{overflow-x:auto;border-radius:12px;border:.5px solid var(--gray-100);}
 
-  /* HERO */
-  .hero { min-height: calc(100vh - 68px); display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 0 2rem; gap: 3rem; max-width: 1200px; margin: 0 auto; }
-  .hero-text h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 8vw, 108px); line-height: 0.95; letter-spacing: 2px; margin-bottom: 1.5rem; }
-  .hero-text h1 span { color: var(--accent); }
-  .hero-text p { font-size: 17px; color: var(--gray-700); line-height: 1.7; max-width: 420px; margin-bottom: 2rem; }
-  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn-primary { background: var(--black); color: var(--white); border: none; padding: 14px 30px; border-radius: 8px; font-family: 'DM Sans'; font-size: 15px; font-weight: 500; cursor: pointer; }
-  .btn-secondary { background: transparent; color: var(--black); border: 1px solid var(--gray-300); padding: 14px 30px; border-radius: 8px; font-family: 'DM Sans'; font-size: 15px; cursor: pointer; }
-  .btn-primary:hover { background: var(--accent); }
-  .btn-secondary:hover { border-color: var(--black); }
-  .hero-stats { display: flex; gap: 2rem; margin-top: 3rem; padding-top: 2rem; border-top: 0.5px solid var(--gray-100); }
-  .stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; }
-  .stat-label { font-size: 13px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 1px; }
-  .hero-visual { display: flex; flex-direction: column; gap: 16px; }
-  .home-class-card { background: var(--gray-50); border: 0.5px solid var(--gray-100); border-radius: 12px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; }
-  .home-class-card.featured { background: var(--black); border-color: var(--black); }
-  .hci h3 { font-size: 16px; font-weight: 500; color: var(--black); margin-bottom: 4px; }
-  .home-class-card.featured .hci h3 { color: var(--white); }
-  .hci-meta { font-size: 13px; color: var(--gray-500); display: flex; gap: 12px; }
-  .home-class-card.featured .hci-meta { color: var(--gray-300); }
-  .spots-badge { font-size: 12px; padding: 4px 11px; border-radius: 20px; font-weight: 500; white-space: nowrap; }
-  .spots-open { background: #eaf3de; color: #3b6d11; }
-  .spots-low { background: #faeeda; color: #854f0b; }
-  .spots-full { background: var(--gray-100); color: var(--gray-500); }
+  /* ── TIMETABLE: position:relative on the wrapper so labels attach to it ── */
+  .tt-wrap{position:relative;}
+  .tt-grid{min-width:620px;}
+  .tt-head-row{display:flex;border-bottom:1px solid var(--gray-100);background:var(--gray-50);}
+  .tt-head-time{width:72px;min-width:72px;padding:14px 12px;border-right:.5px solid var(--gray-100);}
+  .tt-head-lane{flex:1;padding:14px 8px;text-align:center;border-right:.5px solid var(--gray-100);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:var(--accent);}
+  .tt-head-lane:last-child{border-right:none;}
+  .tt-row{display:flex;border-bottom:.5px solid var(--gray-100);}
+  .tt-row:last-child{border-bottom:none;}
+  .tt-row.half-hour .tt-time{color:var(--gray-300);font-size:10px;}
+  .tt-time{width:72px;min-width:72px;font-size:12px;font-weight:500;color:var(--gray-500);padding:0 10px 0 14px;display:flex;align-items:center;height:40px;border-right:.5px solid var(--gray-100);white-space:nowrap;flex-shrink:0;}
+  .tt-cell{flex:1;height:40px;border-right:.5px solid var(--gray-100);position:relative;cursor:pointer;background:#fff;transition:background .08s;}
+  .tt-cell:last-child{border-right:none;}
+  .tt-cell.available:hover{background:var(--accent-light);}
+  .tt-cell.taken{background:var(--gray-50);cursor:not-allowed;}
+  .tt-cell.drag-selecting{background:rgba(48,96,184,.15);}
 
-  /* SHARED */
-  .section { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
-  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 1px; margin-bottom: 1.5rem; }
-  .section-title span { color: var(--accent); }
+  /* Mine cells: just fill + border, no label inside */
+  .tt-cell.mine{background:var(--mine);cursor:pointer;}
+  .tt-cell.mine.blk-top{border-top:2px solid var(--mine-bd)!important;border-left:2px solid var(--mine-bd)!important;border-right:2px solid var(--mine-bd)!important;border-bottom:none!important;border-radius:6px 6px 0 0;height:41px;}
+  .tt-cell.mine.blk-mid{border-top:none!important;border-bottom:none!important;border-left:2px solid var(--mine-bd)!important;border-right:2px solid var(--mine-bd)!important;border-radius:0;margin-top:-1px;height:42px;}
+  .tt-cell.mine.blk-bot{border-top:none!important;border-left:2px solid var(--mine-bd)!important;border-right:2px solid var(--mine-bd)!important;border-bottom:2px solid var(--mine-bd)!important;border-radius:0 0 6px 6px;margin-top:-1px;height:41px;}
+  .tt-cell.mine.blk-solo{border:2px solid var(--mine-bd)!important;border-radius:6px;}
 
-  /* ABOUT PAGE */
-  .about-page { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-
-  /* Hero photo block */
-  .photo-block {
-    width: 100%;
-    height: 420px;
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 4rem;
-    position: relative;
-    background: var(--gray-50);
-    border: 0.5px solid var(--gray-100);
+  /*
+   * BLOCK LABEL: absolutely positioned on .tt-wrap (the grid container),
+   * NOT inside any cell or row. This completely bypasses overflow clipping.
+   * top/left/width/height all set by JS using getBoundingClientRect.
+   */
+  .block-overlay{
+    position:absolute;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:2px;
+    pointer-events:none;
+    z-index:10;
+    padding:4px 20px 4px 4px;
+    text-align:center;
   }
-  .photo-block img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+  .block-overlay .bl-type{font-size:12px;font-weight:500;color:#fff;white-space:nowrap;}
+  .block-overlay .bl-with{font-size:10px;color:rgba(255,255,255,.88);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+  .block-overlay .bl-time{font-size:10px;color:rgba(255,255,255,.65);white-space:nowrap;}
+  .block-cancel-overlay{
+    position:absolute;
+    font-size:14px;line-height:1;cursor:pointer;
+    color:rgba(255,255,255,.85);
+    background:none;border:none;
+    z-index:11;padding:0;
+    pointer-events:all;
   }
-  .photo-placeholder {
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 12px; cursor: pointer;
-  }
-  .photo-placeholder-icon {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: var(--gray-100);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .photo-placeholder-icon svg { width: 24px; height: 24px; }
-  .photo-placeholder p { font-size: 14px; color: var(--gray-500); text-align: center; line-height: 1.6; }
-  .photo-placeholder strong { color: var(--black); font-weight: 500; display: block; font-size: 15px; margin-bottom: 4px; }
-  .upload-btn {
-    padding: 9px 20px; border-radius: 8px; border: 1px solid var(--gray-300);
-    background: var(--white); color: var(--black); font-family: 'DM Sans';
-    font-size: 13px; cursor: pointer; font-weight: 500; margin-top: 4px;
-  }
-  .upload-btn:hover { border-color: var(--black); }
-  #photo-input { display: none; }
+  .block-cancel-overlay:hover{color:#fff;}
 
-  /* About intro */
-  .about-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
-  .about-intro h2 { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 1px; line-height: 0.95; margin-bottom: 1.5rem; }
-  .about-intro h2 span { color: var(--accent); }
-  .about-intro p { font-size: 16px; color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem; }
-  .about-intro p:last-child { margin-bottom: 0; }
-
-  /* Values */
-  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 4rem; }
-  .value-card { padding: 1.5rem; background: var(--gray-50); border-radius: 12px; }
-  .value-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--accent); letter-spacing: 1px; margin-bottom: 8px; }
-  .value-title { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
-  .value-desc { font-size: 14px; color: var(--gray-700); line-height: 1.7; }
-
-  /* Divider */
-  .about-divider { height: 0.5px; background: var(--gray-100); margin: 0 0 4rem; }
-
-  /* Meet STATION8 — coaches */
-  .meet-header { margin-bottom: 2rem; }
-  .meet-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 1px; }
-  .meet-header h2 span { color: var(--accent); }
-  .meet-header p { font-size: 15px; color: var(--gray-500); margin-top: 6px; }
-
-  .coaches-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .coach-card { border: 0.5px solid var(--gray-100); border-radius: 12px; overflow: hidden; }
-  .coach-avatar { height: 160px; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 2px; }
-  .coach-info { padding: 16px 18px; }
-  .coach-info h3 { font-size: 17px; font-weight: 500; }
-  .coach-role { font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin: 4px 0 8px; }
-  .coach-bio { font-size: 13px; color: var(--gray-700); line-height: 1.6; }
-  .coach-stat { display: inline-block; font-size: 11px; background: var(--gray-50); padding: 3px 10px; border-radius: 20px; margin-top: 10px; margin-right: 6px; color: var(--gray-700); }
-
-  /* DASHBOARD */
-  .dashboard { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-  .dashboard-header { margin-bottom: 2rem; }
-  .dashboard-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 1px; }
-  .dashboard-header p { font-size: 15px; color: var(--gray-500); margin-top: 4px; }
-  .metrics-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-bottom: 2rem; }
-  .metric-card { background: var(--gray-50); border-radius: 10px; padding: 1rem; }
-  .metric-label { font-size: 13px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
-  .metric-val { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 1px; }
-  .metric-sub { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
-  .dash-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-  .dash-card { background: var(--white); border: 0.5px solid var(--gray-100); border-radius: 12px; padding: 1.25rem; }
-  .dash-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 1rem; padding-bottom: 12px; border-bottom: 0.5px solid var(--gray-100); }
-  .schedule-item { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 0.5px solid var(--gray-100); }
-  .schedule-item:last-child { border-bottom: none; }
-  .schedule-time { font-size: 13px; color: var(--gray-500); min-width: 55px; }
-  .schedule-name { font-size: 15px; font-weight: 500; }
-  .schedule-coach { font-size: 13px; color: var(--gray-500); }
-  .cancel-btn { margin-left: auto; font-size: 12px; color: var(--accent); cursor: pointer; background: none; border: none; font-family: 'DM Sans'; }
-
-  /* RESULTS */
-  .results-table { width: 100%; border-collapse: collapse; font-size: 15px; }
-  .results-table th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--gray-500); padding: 0 12px 12px 12px; border-bottom: 0.5px solid var(--gray-100); }
-  .results-table td { padding: 14px 12px; border-bottom: 0.5px solid var(--gray-100); }
-  .results-table tr:last-child td { border-bottom: none; }
-  .results-table tr:hover td { background: var(--gray-50); }
-  .rank-badge { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; }
-  .rank-1 { background: #faeeda; color: #854f0b; }
-  .rank-2 { background: var(--gray-100); color: var(--gray-700); }
-  .rank-3 { background: #faece7; color: #993c1d; }
-  .rank-other { background: var(--gray-50); color: var(--gray-500); }
-  .time-val { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; }
-  .pr-badge { font-size: 11px; background: #eaf3de; color: #3b6d11; padding: 2px 8px; border-radius: 20px; margin-left: 8px; font-weight: 500; }
-
-  /* SIGN IN */
-  .signin-wrap { min-height: calc(100vh - 68px); display: flex; align-items: center; justify-content: center; padding: 2rem; background: var(--gray-50); }
-  .signin-card { background: var(--white); border: 0.5px solid var(--gray-100); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 420px; }
-  .signin-logo { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; text-align: center; margin-bottom: 0.5rem; }
-  .signin-logo span { color: var(--accent); }
-  .signin-sub { font-size: 14px; color: var(--gray-500); text-align: center; margin-bottom: 2rem; }
-  .field { margin-bottom: 14px; }
-  .field label { display: block; font-size: 13px; color: var(--gray-700); margin-bottom: 6px; font-weight: 500; }
-  .field input { width: 100%; padding: 11px 14px; border: 0.5px solid var(--gray-300); border-radius: 8px; font-family: 'DM Sans'; font-size: 15px; color: var(--black); outline: none; }
-  .field input:focus { border-color: var(--black); }
-  .btn-full { width: 100%; padding: 13px; border-radius: 8px; font-family: 'DM Sans'; font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 6px; }
-  .btn-signin { background: var(--black); color: var(--white); border: none; }
-  .btn-signin:hover { background: var(--accent); }
-  .signin-footer { text-align: center; margin-top: 1.5rem; font-size: 14px; color: var(--gray-500); }
-  .signin-footer a { color: var(--black); cursor: pointer; text-decoration: none; font-weight: 500; }
-
-  /* SCHEDULE */
-  .schedule-page { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
-  .schedule-page > h1 { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 1px; margin-bottom: 1.5rem; }
-  .schedule-page > h1 span { color: var(--accent); }
-  .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 2.5rem; }
-  .filter-chip { padding: 7px 16px; border-radius: 100px; font-size: 13px; font-weight: 500; border: 1px solid var(--gray-100); cursor: pointer; font-family: 'DM Sans'; background: var(--white); color: var(--gray-700); white-space: nowrap; }
-  .filter-chip:hover { border-color: var(--gray-500); color: var(--black); }
-  .filter-chip.active { background: var(--black); color: var(--white); border-color: var(--black); }
-  .filter-chip.active-special { background: #854f0b; color: var(--white); border-color: #854f0b; }
-  .filter-clear { padding: 7px 14px; border-radius: 100px; font-size: 13px; border: 1px dashed var(--gray-300); cursor: pointer; font-family: 'DM Sans'; background: transparent; color: var(--accent); display: none; }
-  .filter-clear.visible { display: block; }
-  .day-group { margin-bottom: 2.5rem; }
-  .day-label { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--black); text-transform: uppercase; margin-bottom: 6px; padding-bottom: 10px; border-bottom: 1px solid var(--gray-100); }
-  .session-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-500); font-weight: 500; margin: 14px 0 8px 4px; }
-  .class-row { display: grid; grid-template-columns: 76px 1fr auto; align-items: center; gap: 14px; padding: 13px 16px; border-radius: 10px; border: 0.5px solid var(--gray-100); margin-bottom: 7px; background: var(--white); transition: opacity 0.18s, border-color 0.18s; }
-  .class-row:hover:not(.dimmed) { border-color: var(--gray-300); }
-  .class-row.dimmed { opacity: 0.22; }
-  .class-row.dimmed .book-btn { pointer-events: none; }
-  .class-row.highlighted { border-color: var(--black); }
-  .class-row.highlighted.special-row { border-color: #ef9f27; }
-  .row-time { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; color: var(--black); line-height: 1.1; }
-  .row-time-ampm { font-size: 11px; font-family: 'DM Sans'; color: var(--gray-500); font-weight: 400; letter-spacing: 0; display: block; }
-  .row-time-dur { font-size: 10px; font-family: 'DM Sans'; color: var(--gray-300); letter-spacing: 0; display: block; }
-  .row-info { min-width: 0; }
-  .row-tag { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent); font-weight: 500; margin-bottom: 2px; }
-  .row-tag.tag-special { color: #854f0b; }
-  .row-name { font-size: 15px; font-weight: 500; margin-bottom: 3px; }
-  .row-meta { font-size: 12px; color: var(--gray-500); display: flex; gap: 10px; flex-wrap: wrap; }
-  .row-action { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; min-width: 96px; }
-  .book-btn { padding: 8px 16px; background: var(--black); color: var(--white); border: none; border-radius: 8px; font-family: 'DM Sans'; font-size: 13px; cursor: pointer; font-weight: 500; white-space: nowrap; width: 100%; text-align: center; }
-  .book-btn:hover:not(:disabled) { background: var(--accent); }
-  .book-btn.booked { background: #3b6d11; color: var(--white); cursor: default; }
-  .book-btn.full { background: var(--gray-100); color: var(--gray-500); cursor: default; }
-  .spots-pill { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; white-space: nowrap; text-align: center; width: 100%; }
-  .class-row.mock-race-row { background: var(--black); border-color: var(--black); }
-  .class-row.mock-race-row .row-time { color: var(--white); }
-  .class-row.mock-race-row .row-time-ampm { color: var(--gray-500); }
-  .class-row.mock-race-row .row-time-dur { color: var(--gray-700); }
-  .class-row.mock-race-row .row-tag { color: var(--accent); }
-  .class-row.mock-race-row .row-name { color: var(--white); }
-  .class-row.mock-race-row .row-meta { color: var(--gray-500); }
-  .class-row.mock-race-row .book-btn { background: var(--white); color: var(--black); }
-  .class-row.mock-race-row .book-btn:hover:not(:disabled) { background: var(--accent); color: var(--white); }
-  .class-row.mock-race-row.dimmed { opacity: 0.18; }
+  .legend{display:flex;gap:16px;margin-top:1rem;flex-wrap:wrap;}
+  .legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--gray-700);}
+  .legend-swatch{width:16px;height:16px;border-radius:4px;flex-shrink:0;}
+  .modal-backdrop{display:none;position:fixed;inset:0;z-index:500;background:rgba(14,14,14,.45);align-items:center;justify-content:center;padding:1rem;}
+  .modal-backdrop.open{display:flex;}
+  .modal{background:#fff;border-radius:16px;width:100%;max-width:420px;padding:2rem;position:relative;box-shadow:0 8px 40px rgba(14,14,14,.18);}
+  .modal-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--gray-500);line-height:1;}
+  .modal h2{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;margin-bottom:4px;}
+  .modal h2 span{color:var(--accent);}
+  .modal-meta{font-size:13px;color:var(--gray-500);margin-bottom:1.5rem;}
+  .modal-duration{font-size:14px;font-weight:500;color:var(--accent);background:var(--accent-light);padding:8px 14px;border-radius:8px;margin-bottom:1.5rem;text-align:center;}
+  .type-selector{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem;}
+  .type-btn{padding:14px 8px;border-radius:10px;border:1.5px solid var(--gray-100);background:#fff;cursor:pointer;font-family:'DM Sans';text-align:center;transition:border-color .12s,background .12s;}
+  .type-btn:hover{border-color:var(--accent);}
+  .type-btn.selected{border-color:var(--accent);background:var(--accent-light);}
+  .type-btn-icon{font-size:20px;margin-bottom:5px;display:block;}
+  .type-btn-label{font-size:13px;font-weight:500;display:block;color:var(--black);}
+  .type-btn-sub{font-size:11px;color:var(--gray-500);display:block;margin-top:2px;}
+  .user-slot-label{font-size:12px;font-weight:500;color:var(--gray-700);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;}
+  .user-slots{display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem;}
+  .user-search-wrap{position:relative;}
+  .user-search{width:100%;padding:10px 14px;border:.5px solid var(--gray-300);border-radius:8px;font-family:'DM Sans';font-size:14px;outline:none;}
+  .user-search:focus{border-color:var(--accent);}
+  .user-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:.5px solid var(--gray-100);border-radius:10px;z-index:10;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08);}
+  .user-option{padding:10px 14px;cursor:pointer;font-size:14px;display:flex;align-items:center;gap:10px;}
+  .user-option:hover{background:var(--accent-light);}
+  .user-option-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent-light);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;}
+  .user-selected{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--accent-light);border-radius:8px;border:.5px solid #c8d8f0;}
+  .user-selected-name{font-size:14px;font-weight:500;flex:1;}
+  .user-remove{background:none;border:none;cursor:pointer;color:var(--gray-500);font-size:16px;padding:0 4px;}
+  .modal-confirm{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:'DM Sans';font-size:15px;font-weight:500;cursor:pointer;}
+  .modal-confirm:hover{background:var(--accent-dark);}
+  .modal-confirm:disabled{background:var(--gray-100);color:var(--gray-500);cursor:not-allowed;}
 </style>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-left">
-    <div class="nav-logo" onclick="showPage('home')">STATION<span>8</span></div>
-    <div class="nav-partner">Official <em>HYROX</em> Partner</div>
-  </div>
+<nav class="top-nav">
+  <div class="nav-left" onclick="showPage('home')"><div class="nav-logo">STATION<span>8</span></div><div class="nav-partner">Official <em>HYROX</em> Partner</div></div>
   <div class="nav-links" id="main-nav">
-    <a onclick="showPage('classes')">Classes</a>
-    <a onclick="showPage('about')">About</a>
-    <a onclick="showPage('results')">Race Results</a>
-    <a onclick="showPage('signin')" class="nav-cta">Sign In</a>
+    <a onclick="showPage('classes')">Classes</a><a onclick="showPage('reserve')">Reserve</a><a onclick="showPage('about')">About</a><a onclick="showPage('results')">Race Results</a><a onclick="showPage('signin')" class="nav-cta">Sign In</a>
   </div>
   <div class="nav-user" id="user-nav" style="display:none;">
     <a style="font-size:15px;color:var(--gray-700);cursor:pointer;text-decoration:none;" onclick="showPage('dashboard')">Dashboard</a>
     <a style="font-size:15px;color:var(--gray-700);cursor:pointer;text-decoration:none;" onclick="showPage('classes')">Classes</a>
-    <a style="font-size:15px;color:var(--gray-700);cursor:pointer;text-decoration:none;" onclick="showPage('about')">About</a>
+    <a style="font-size:15px;color:var(--gray-700);cursor:pointer;text-decoration:none;" onclick="showPage('reserve')">Reserve</a>
     <div class="avatar" onclick="showPage('dashboard')">JS</div>
   </div>
 </nav>
 
+<div class="bottom-tabs" id="bottom-tabs">
+  <div class="bottom-tabs-inner">
+    <div class="tab-indicator" id="tab-indicator"></div>
+    <button class="tab-btn active" id="tab-home" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg><span>Home</span></button>
+    <button class="tab-btn" id="tab-classes" onclick="showPage('classes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Classes</span></button>
+    <button class="tab-btn" id="tab-reserve" onclick="showPage('reserve')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><span>Reserve</span></button>
+    <button class="tab-btn" id="tab-about" onclick="showPage('about')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>About</span></button>
+    <button class="tab-btn" id="tab-dashboard" onclick="showPage('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></button>
+    <button class="tab-btn" id="tab-results" onclick="showPage('results')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span>Results</span></button>
+  </div>
+</div>
+
 <!-- HOME -->
-<div class="page active" id="page-home">
+<div class="page active mobile-pad" id="page-home">
   <div class="hero">
     <div class="hero-text">
       <h1>BUILT FOR <span>THE RACE.</span></h1>
       <p>STATION8 is a dedicated Hyrox training studio. Every class, every drill, every workout is designed to get you to the finish line faster.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="showPage('signin')">Join the Studio</button>
-        <button class="btn-secondary" onclick="showPage('classes')">View Classes</button>
-      </div>
+      <div class="hero-btns"><button class="btn-primary" onclick="showPage('signin')">Join the Studio</button><button class="btn-secondary" onclick="showPage('classes')">View Classes</button></div>
       <div class="hero-stats">
         <div><div class="stat-val">340+</div><div class="stat-label">Members</div></div>
         <div><div class="stat-val">18</div><div class="stat-label">Weekly Classes</div></div>
@@ -275,145 +304,44 @@
 </div>
 
 <!-- SIGN IN -->
-<div class="page" id="page-signin">
-  <div class="signin-wrap">
-    <div class="signin-card">
-      <div class="signin-logo">STATION<span>8</span></div>
-      <div class="signin-sub">Sign in to your account</div>
-      <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com"/></div>
-      <div class="field"><label>Password</label><input type="password" placeholder="••••••••"/></div>
-      <button class="btn-full btn-signin" onclick="doSignIn()">Sign In</button>
-      <div style="text-align:center;margin-top:12px;"><span style="font-size:13px;color:var(--gray-500);cursor:pointer;">Forgot password?</span></div>
-      <div class="signin-footer">Don't have an account? <a onclick="showPage('home')">Join STATION8</a></div>
-    </div>
-  </div>
+<div class="page mobile-pad" id="page-signin">
+  <div class="signin-wrap"><div class="signin-card">
+    <div class="signin-logo">STATION<span>8</span></div>
+    <div class="signin-sub">Sign in to your account</div>
+    <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com"/></div>
+    <div class="field"><label>Password</label><input type="password" placeholder="••••••••"/></div>
+    <button class="btn-full btn-signin" onclick="doSignIn()">Sign In</button>
+    <div style="text-align:center;margin-top:12px;"><span style="font-size:13px;color:var(--gray-500);cursor:pointer;">Forgot password?</span></div>
+    <div class="signin-footer">Don't have an account? <a onclick="showPage('home')">Join STATION8</a></div>
+  </div></div>
 </div>
 
 <!-- DASHBOARD -->
-<div class="page" id="page-dashboard">
-  <div class="dashboard">
-    <div class="dashboard-header"><h1>Good morning, Jordan</h1><p>Sunday, March 15, 2026 — Next class in 14 hours</p></div>
-    <div class="metrics-grid">
-      <div class="metric-card"><div class="metric-label">Classes this month</div><div class="metric-val">11</div><div class="metric-sub">+3 vs last month</div></div>
-      <div class="metric-card"><div class="metric-label">Personal best</div><div class="metric-val">1:14:22</div><div class="metric-sub">Hyrox Open</div></div>
-      <div class="metric-card"><div class="metric-label">Streak</div><div class="metric-val">8 days</div><div class="metric-sub">Keep it going!</div></div>
-      <div class="metric-card"><div class="metric-label">Membership</div><div class="metric-val">Pro</div><div class="metric-sub">Renews Apr 1</div></div>
+<div class="page mobile-pad" id="page-dashboard">
+  <div style="max-width:1200px;margin:0 auto;padding:2rem;">
+    <h1 style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:1px;margin-bottom:.5rem;">Good morning, Jordan</h1>
+    <p style="font-size:15px;color:var(--gray-500);margin-bottom:2rem;">Monday, March 16, 2026</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="showPage('classes')">View Classes</button>
+      <button class="btn-secondary" onclick="showPage('reserve')">Reserve a Lane</button>
     </div>
-    <div class="dash-grid">
-      <div class="dash-card">
-        <h3>Upcoming classes</h3>
-        <div class="schedule-item"><div class="schedule-time">MON 6AM</div><div><div class="schedule-name">Sled & Ski Drills</div><div class="schedule-coach">Coach Sarah · Studio A</div></div><button class="cancel-btn">Cancel</button></div>
-        <div class="schedule-item"><div class="schedule-time">WED 12PM</div><div><div class="schedule-name">Zone 2 Foundations</div><div class="schedule-coach">Coach Jess · Studio B</div></div><button class="cancel-btn">Cancel</button></div>
-        <div class="schedule-item"><div class="schedule-time">FRI 5:30PM</div><div><div class="schedule-name">Benchmark Friday</div><div class="schedule-coach">Coach Sarah · Studio A</div></div><button class="cancel-btn">Cancel</button></div>
-        <button class="btn-secondary" style="margin-top:14px;font-size:14px;padding:10px 18px;" onclick="showPage('classes')">+ Book another class</button>
-      </div>
-      <div class="dash-card">
-        <h3>Quick links</h3>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div onclick="showPage('results')" style="display:flex;align-items:center;justify-content:space-between;padding:13px;background:var(--gray-50);border-radius:8px;cursor:pointer;font-size:15px;">Race Results <span style="color:var(--gray-500)">→</span></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px;background:var(--gray-50);border-radius:8px;cursor:pointer;font-size:15px;">Billing & Plans <span style="color:var(--gray-500)">→</span></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px;background:var(--gray-50);border-radius:8px;cursor:pointer;font-size:15px;">Account Settings <span style="color:var(--gray-500)">→</span></div>
-          <div onclick="showPage('about')" style="display:flex;align-items:center;justify-content:space-between;padding:13px;background:var(--gray-50);border-radius:8px;cursor:pointer;font-size:15px;">About STATION8 <span style="color:var(--gray-500)">→</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ABOUT PAGE -->
-<div class="page" id="page-about">
-  <div class="about-page">
-
-    <!-- Photo block with upload -->
-    <div class="photo-block" id="photo-block">
-      <img id="hero-photo" src="" style="display:none;" alt="STATION8 athletes"/>
-      <div class="photo-placeholder" id="photo-placeholder" onclick="document.getElementById('photo-input').click()">
-        <div class="photo-placeholder-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--gray-500)">
-            <rect x="3" y="3" width="18" height="18" rx="3"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <path d="M21 15l-5-5L5 21"/>
-          </svg>
-        </div>
-        <p><strong>Add your HYROX photo here</strong>Click to upload — sled push, race day, studio action</p>
-        <button class="upload-btn" onclick="event.stopPropagation(); document.getElementById('photo-input').click()">Choose photo</button>
-      </div>
-      <input type="file" id="photo-input" accept="image/*" onchange="loadPhoto(event)"/>
-    </div>
-
-    <!-- About intro -->
-    <div class="about-intro">
-      <div>
-        <h2>ABOUT <span>STATION8</span></h2>
-      </div>
-      <div>
-        <p>STATION8 was built for one purpose: to prepare you for the Hyrox race. We are a dedicated functional fitness studio rooted in the Hyrox training philosophy — where every session, every movement, and every coach is laser-focused on race performance.</p>
-        <p>We are an Official Hyrox Partner studio, which means you train with certified coaches, race-standard equipment, and a community that knows exactly what it takes to push through all eight stations.</p>
-        <p>Whether you're a first-time finisher or chasing a podium time, STATION8 is your home base.</p>
-      </div>
-    </div>
-
-    <!-- Values -->
-    <div class="values-grid">
-      <div class="value-card">
-        <div class="value-num">01</div>
-        <div class="value-title">Race-first training</div>
-        <div class="value-desc">Every class is built around the Hyrox race format. No filler. No fluff. Just the work that moves the needle on race day.</div>
-      </div>
-      <div class="value-card">
-        <div class="value-num">02</div>
-        <div class="value-title">Community-driven</div>
-        <div class="value-desc">We train together, race together, and celebrate together. STATION8 is a team — from your first class to your fastest finish.</div>
-      </div>
-      <div class="value-card">
-        <div class="value-num">03</div>
-        <div class="value-title">Coached, always</div>
-        <div class="value-desc">Every session is led by an expert Hyrox coach. You'll never guess what to do — you'll always know exactly why you're doing it.</div>
-      </div>
-    </div>
-
-    <div class="about-divider"></div>
-
-    <!-- Meet STATION8 — coaches -->
-    <div class="meet-header">
-      <h2>MEET <span>STATION8</span></h2>
-      <p>The coaches behind every class, every race plan, and every PB.</p>
-    </div>
-    <div class="coaches-grid">
-      <div class="coach-card">
-        <div class="coach-avatar" style="background:#f0997b;color:#4a1b0c;">SL</div>
-        <div class="coach-info"><h3>Sarah Lindqvist</h3><div class="coach-role">Head Coach · Hyrox Specialist</div><p class="coach-bio">3x Hyrox World Series podium finisher. Sarah specializes in race simulation, transitions, and mental race prep.</p><span class="coach-stat">Hyrox Pro</span><span class="coach-stat">PB: 1:02:14</span></div>
-      </div>
-      <div class="coach-card">
-        <div class="coach-avatar" style="background:#b5d4f4;color:#042c53;">MT</div>
-        <div class="coach-info"><h3>Mike Torres</h3><div class="coach-role">Strength & Conditioning Coach</div><p class="coach-bio">Former CrossFit Games competitor. Mike builds the power and mechanics behind sled, ski erg, and functional strength.</p><span class="coach-stat">NSCA-CSCS</span><span class="coach-stat">PB: 1:08:41</span></div>
-      </div>
-      <div class="coach-card">
-        <div class="coach-avatar" style="background:#c0dd97;color:#173404;">JK</div>
-        <div class="coach-info"><h3>Jess Kim</h3><div class="coach-role">Running & Endurance Coach</div><p class="coach-bio">Marathon qualifier and certified run coach. Jess owns the aerobic engine — pacing, threshold work, and long-effort conditioning.</p><span class="coach-stat">RRCA Certified</span><span class="coach-stat">Sub-3hr Marathon</span></div>
-      </div>
-    </div>
-
   </div>
 </div>
 
 <!-- CLASSES -->
-<div class="page" id="page-classes">
+<div class="page mobile-pad" id="page-classes">
   <div class="schedule-page">
     <h1>CLASS <span>SCHEDULE</span></h1>
     <div class="filter-bar">
-      <button class="filter-chip active" data-filter="all" onclick="applyFilter('all')">All Classes</button>
+      <button class="filter-chip active" data-filter="all" onclick="applyFilter('all')">All</button>
       <button class="filter-chip" data-filter="mockrace" onclick="applyFilter('mockrace')">Mock Race</button>
       <button class="filter-chip" data-filter="power" onclick="applyFilter('power')">Power</button>
       <button class="filter-chip" data-filter="hybrid" onclick="applyFilter('hybrid')">Hybrid</button>
       <button class="filter-chip" data-filter="endurance" onclick="applyFilter('endurance')">Endurance</button>
-      <button class="filter-chip" data-filter="special" onclick="applyFilter('special')">STATION8 Special</button>
-      <button class="filter-clear" id="clear-btn" onclick="applyFilter('all')">✕ Clear filter</button>
+      <button class="filter-chip" data-filter="special" onclick="applyFilter('special')">S8 Special</button>
+      <button class="filter-clear" id="clear-btn" onclick="applyFilter('all')">✕ Clear</button>
     </div>
-
-    <!-- MONDAY -->
-    <div class="day-group">
-      <div class="day-label">Monday</div>
+    <div class="day-group"><div class="day-label">Monday</div>
       <div class="session-label">Morning</div>
       <div class="class-row" data-type="power"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Sled & Ski Drills</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">10 spots</span></div></div>
       <div class="class-row" data-type="hybrid"><div class="row-time">7:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">12 spots</span></div></div>
@@ -427,150 +355,297 @@
       <div class="class-row" data-type="hybrid"><div class="row-time">6:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">11 spots</span></div></div>
       <div class="class-row" data-type="endurance"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Zone 2 Foundations</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">14 spots</span></div></div>
     </div>
-
-    <!-- TUESDAY -->
-    <div class="day-group">
-      <div class="day-label">Tuesday</div>
-      <div class="session-label">Morning</div>
+    <div class="day-group"><div class="day-label">Tuesday</div>
       <div class="class-row" data-type="endurance"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Threshold Builder</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">9 spots</span></div></div>
       <div class="class-row" data-type="power"><div class="row-time">7:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Roxzone Strength</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">8:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Running Intervals</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">12 spots</span></div></div>
-      <div class="session-label">Mid-Day</div>
-      <div class="class-row" data-type="power"><div class="row-time">11:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Sled & Ski Drills</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">6 spots</span></div></div>
-      <div class="class-row" data-type="endurance"><div class="row-time">12:00<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Zone 2 Foundations</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">14 spots</span></div></div>
-      <div class="session-label">Evening</div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">4:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">10 spots</span></div></div>
-      <div class="class-row" data-type="endurance"><div class="row-time">5:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Threshold Builder</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">9 spots</span></div></div>
-      <div class="class-row" data-type="power"><div class="row-time">6:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Roxzone Strength</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
-      <div class="class-row special-row" data-type="special"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag tag-special">STATION8 Special</div><div class="row-name">Members vs Coaches</div><div class="row-meta"><span>75 min</span><span>Full Staff</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">16 spots</span></div></div>
+      <div class="class-row special-row" data-type="special"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag tag-special">S8 Special</div><div class="row-name">Members vs Coaches</div><div class="row-meta"><span>75 min</span><span>Full Staff</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">16 spots</span></div></div>
     </div>
-
-    <!-- WEDNESDAY -->
-    <div class="day-group">
-      <div class="day-label">Wednesday</div>
-      <div class="session-label">Morning</div>
+    <div class="day-group"><div class="day-label">Wednesday</div>
       <div class="class-row" data-type="hybrid"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">10 spots</span></div></div>
-      <div class="class-row" data-type="endurance"><div class="row-time">7:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Threshold Builder</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">9 spots</span></div></div>
-      <div class="class-row" data-type="power"><div class="row-time">8:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Sled & Ski Drills</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">6 spots</span></div></div>
-      <div class="session-label">Mid-Day</div>
-      <div class="class-row" data-type="endurance"><div class="row-time">11:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Zone 2 Foundations</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">14 spots</span></div></div>
       <div class="class-row" data-type="hybrid"><div class="row-time">12:00<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Running Intervals</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn full" disabled>Full</button><span class="spots-pill spots-full">0 spots</span></div></div>
-      <div class="session-label">Evening</div>
-      <div class="class-row" data-type="power"><div class="row-time">4:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Roxzone Strength</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">5:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">10 spots</span></div></div>
-      <div class="class-row" data-type="endurance"><div class="row-time">6:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Threshold Builder</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">9 spots</span></div></div>
       <div class="class-row" data-type="power"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Sled & Ski Drills</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">6 spots</span></div></div>
     </div>
-
-    <!-- THURSDAY -->
-    <div class="day-group">
-      <div class="day-label">Thursday</div>
-      <div class="session-label">Morning</div>
+    <div class="day-group"><div class="day-label">Thursday</div>
       <div class="class-row" data-type="power"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Roxzone Strength</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
-      <div class="class-row" data-type="endurance"><div class="row-time">7:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Zone 2 Foundations</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">14 spots</span></div></div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">8:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Running Intervals</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">12 spots</span></div></div>
-      <div class="session-label">Mid-Day</div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">11:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">10 spots</span></div></div>
-      <div class="class-row" data-type="endurance"><div class="row-time">12:00<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Threshold Builder</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">9 spots</span></div></div>
-      <div class="session-label">Evening</div>
-      <div class="class-row" data-type="endurance"><div class="row-time">4:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Zone 2 Foundations</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">14 spots</span></div></div>
-      <div class="class-row" data-type="power"><div class="row-time">5:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Sled & Ski Drills</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">7 spots</span></div></div>
-      <div class="class-row" data-type="power"><div class="row-time">6:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Roxzone Strength</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
-      <div class="class-row special-row" data-type="special"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag tag-special">STATION8 Special</div><div class="row-name">The S8 Challenge</div><div class="row-meta"><span>75 min</span><span>All Coaches</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">20 spots</span></div></div>
+      <div class="class-row special-row" data-type="special"><div class="row-time">7:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag tag-special">S8 Special</div><div class="row-name">The S8 Challenge</div><div class="row-meta"><span>75 min</span><span>All Coaches</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">20 spots</span></div></div>
     </div>
-
-    <!-- FRIDAY -->
-    <div class="day-group">
-      <div class="day-label">Friday</div>
-      <div class="session-label">Morning</div>
+    <div class="day-group"><div class="day-label">Friday</div>
       <div class="class-row" data-type="hybrid"><div class="row-time">6:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Running Intervals</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">12 spots</span></div></div>
-      <div class="class-row" data-type="power"><div class="row-time">7:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Roxzone Strength</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
-      <div class="class-row" data-type="endurance"><div class="row-time">8:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Zone 2 Foundations</div><div class="row-meta"><span>60 min</span><span>Coach Mike</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">14 spots</span></div></div>
-      <div class="session-label">Mid-Day</div>
-      <div class="class-row" data-type="power"><div class="row-time">11:00<span class="row-time-ampm">AM</span></div><div class="row-info"><div class="row-tag">Power</div><div class="row-name">Sled & Ski Drills</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">6 spots</span></div></div>
-      <div class="class-row" data-type="endurance"><div class="row-time">12:00<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Endurance</div><div class="row-name">Threshold Builder</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">9 spots</span></div></div>
-      <div class="session-label">Evening</div>
-      <div class="class-row" data-type="hybrid"><div class="row-time">4:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag">Hybrid</div><div class="row-name">Run + Erg Combos</div><div class="row-meta"><span>60 min</span><span>Coach Jess</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">10 spots</span></div></div>
-      <div class="class-row special-row" data-type="special"><div class="row-time">5:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag tag-special">STATION8 Special</div><div class="row-name">Benchmark Friday</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
+      <div class="class-row special-row" data-type="special"><div class="row-time">5:30<span class="row-time-ampm">PM</span></div><div class="row-info"><div class="row-tag tag-special">S8 Special</div><div class="row-name">Benchmark Friday</div><div class="row-meta"><span>60 min</span><span>Coach Sarah</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">8 spots</span></div></div>
     </div>
-
-    <!-- SATURDAY -->
-    <div class="day-group">
-      <div class="day-label">Saturday</div>
-      <div class="session-label">Mock Race — Full Hyrox Simulation</div>
-      <div class="class-row mock-race-row" data-type="mockrace"><div class="row-time">8:00<span class="row-time-ampm">AM</span><span class="row-time-dur">ends 10am</span></div><div class="row-info"><div class="row-tag">Mock Race</div><div class="row-name">Full Hyrox Race — Wave 1</div><div class="row-meta"><span>2 hrs</span><span>All Coaches</span><span>Full Studio</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-low">5 spots</span></div></div>
-      <div class="class-row mock-race-row" data-type="mockrace"><div class="row-time">10:00<span class="row-time-ampm">AM</span><span class="row-time-dur">ends 12pm</span></div><div class="row-info"><div class="row-tag">Mock Race</div><div class="row-name">Full Hyrox Race — Wave 2</div><div class="row-meta"><span>2 hrs</span><span>All Coaches</span><span>Full Studio</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">12 spots</span></div></div>
-    </div>
-
-    <!-- SUNDAY -->
-    <div class="day-group">
-      <div class="day-label">Sunday</div>
-      <div class="session-label">Mock Race — Full Hyrox Simulation</div>
-      <div class="class-row mock-race-row" data-type="mockrace"><div class="row-time">8:00<span class="row-time-ampm">AM</span><span class="row-time-dur">ends 10am</span></div><div class="row-info"><div class="row-tag">Mock Race</div><div class="row-name">Full Hyrox Race — Wave 1</div><div class="row-meta"><span>2 hrs</span><span>All Coaches</span><span>Full Studio</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">14 spots</span></div></div>
-      <div class="class-row mock-race-row" data-type="mockrace"><div class="row-time">10:00<span class="row-time-ampm">AM</span><span class="row-time-dur">ends 12pm</span></div><div class="row-info"><div class="row-tag">Mock Race</div><div class="row-name">Full Hyrox Race — Wave 2</div><div class="row-meta"><span>2 hrs</span><span>All Coaches</span><span>Full Studio</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">16 spots</span></div></div>
+    <div class="day-group"><div class="day-label">Saturday & Sunday</div>
+      <div class="session-label">Mock Race</div>
+      <div class="class-row mock-race-row" data-type="mockrace"><div class="row-time">8:00<span class="row-time-ampm">AM</span><span class="row-time-dur">ends 10am</span></div><div class="row-info"><div class="row-tag">Mock Race</div><div class="row-name">Full Hyrox Race — Wave 1</div><div class="row-meta"><span>2 hrs</span><span>All Coaches</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-low">5 spots</span></div></div>
+      <div class="class-row mock-race-row" data-type="mockrace"><div class="row-time">10:00<span class="row-time-ampm">AM</span><span class="row-time-dur">ends 12pm</span></div><div class="row-info"><div class="row-tag">Mock Race</div><div class="row-name">Full Hyrox Race — Wave 2</div><div class="row-meta"><span>2 hrs</span><span>All Coaches</span></div></div><div class="row-action"><button class="book-btn" onclick="bookClass(this)">Book</button><span class="spots-pill spots-open">12 spots</span></div></div>
     </div>
   </div>
 </div>
 
-<!-- RACE RESULTS -->
-<div class="page" id="page-results">
-  <div class="section">
-    <div class="section-title">RACE <span>RESULTS</span></div>
-    <div class="dash-card" style="margin-bottom:20px;">
-      <h3>Studio leaderboard — Hyrox Open</h3>
+<!-- ABOUT -->
+<div class="page mobile-pad" id="page-about">
+  <div class="about-page">
+    <div class="about-intro">
+      <div><h2>ABOUT <span>STATION8</span></h2></div>
+      <div>
+        <p>STATION8 was built for one purpose: to prepare you for the Hyrox race. Every session, every movement, and every coach is laser-focused on race performance.</p>
+        <p>We are an Official Hyrox Partner studio — certified coaches, race-standard equipment, and a community that knows what it takes to push through all eight stations.</p>
+        <p>Whether you're a first-time finisher or chasing a podium time, STATION8 is your home base.</p>
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="value-card"><div class="value-num">01</div><div class="value-title">Race-first training</div><div class="value-desc">Every class is built around the Hyrox race format. No filler. No fluff.</div></div>
+      <div class="value-card"><div class="value-num">02</div><div class="value-title">Community-driven</div><div class="value-desc">We train together, race together, and celebrate together.</div></div>
+      <div class="value-card"><div class="value-num">03</div><div class="value-title">Coached, always</div><div class="value-desc">Every session is led by an expert Hyrox coach.</div></div>
+    </div>
+    <div class="about-divider"></div>
+    <div class="meet-header"><h2>MEET <span>STATION8</span></h2><p>The coaches behind every class, every race plan, and every PB.</p></div>
+    <div class="coaches-grid">
+      <div class="coach-card"><div class="coach-avatar" style="background:#dbeafe;color:#1e3a8a;">SL</div><div class="coach-info"><h3>Sarah Lindqvist</h3><div class="coach-role">Head Coach · Hyrox Specialist</div><p class="coach-bio">3x podium finisher. Race simulation, transitions, mental prep.</p><span class="coach-stat">Hyrox Pro</span><span class="coach-stat">PB: 1:02:14</span></div></div>
+      <div class="coach-card"><div class="coach-avatar" style="background:#e0e8f5;color:#0d2a5e;">MT</div><div class="coach-info"><h3>Mike Torres</h3><div class="coach-role">Strength & Conditioning Coach</div><p class="coach-bio">Former CrossFit Games competitor. Sled, ski erg, functional strength.</p><span class="coach-stat">NSCA-CSCS</span><span class="coach-stat">PB: 1:08:41</span></div></div>
+      <div class="coach-card"><div class="coach-avatar" style="background:#c8d8f0;color:#0d2a5e;">JK</div><div class="coach-info"><h3>Jess Kim</h3><div class="coach-role">Running & Endurance Coach</div><p class="coach-bio">Marathon qualifier. Pacing, threshold work, conditioning.</p><span class="coach-stat">RRCA Certified</span><span class="coach-stat">Sub-3hr Marathon</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="page mobile-pad" id="page-results">
+  <div class="results-section">
+    <h1>RACE <span>RESULTS</span></h1>
+    <div style="background:#fff;border:.5px solid var(--gray-100);border-radius:12px;padding:1.25rem;margin-bottom:20px;">
+      <h3 style="font-size:14px;font-weight:500;margin-bottom:1rem;padding-bottom:10px;border-bottom:.5px solid var(--gray-100);">Studio leaderboard — Hyrox Open</h3>
       <table class="results-table">
-        <thead><tr><th>Rank</th><th>Athlete</th><th>Division</th><th>Finish Time</th><th>Event</th></tr></thead>
+        <thead><tr><th>Rank</th><th>Athlete</th><th>Division</th><th>Time</th><th>Event</th></tr></thead>
         <tbody>
-          <tr><td><div class="rank-badge rank-1">1</div></td><td style="font-weight:500;">Sarah L.</td><td style="color:var(--gray-500);font-size:14px;">Women Open</td><td><span class="time-val">1:02:14</span><span class="pr-badge">PB</span></td><td style="font-size:14px;color:var(--gray-500);">Hamburg '25</td></tr>
-          <tr><td><div class="rank-badge rank-2">2</div></td><td style="font-weight:500;">Jordan S.</td><td style="color:var(--gray-500);font-size:14px;">Men Open</td><td><span class="time-val">1:14:22</span><span class="pr-badge">PB</span></td><td style="font-size:14px;color:var(--gray-500);">Chicago '25</td></tr>
-          <tr><td><div class="rank-badge rank-3">3</div></td><td style="font-weight:500;">Alex R.</td><td style="color:var(--gray-500);font-size:14px;">Men Open</td><td><span class="time-val">1:18:05</span></td><td style="font-size:14px;color:var(--gray-500);">Chicago '25</td></tr>
-          <tr><td><div class="rank-badge rank-other">4</div></td><td style="font-weight:500;">Maya P.</td><td style="color:var(--gray-500);font-size:14px;">Women Open</td><td><span class="time-val">1:19:44</span></td><td style="font-size:14px;color:var(--gray-500);">Dallas '25</td></tr>
-          <tr><td><div class="rank-badge rank-other">5</div></td><td style="font-weight:500;">Chris W.</td><td style="color:var(--gray-500);font-size:14px;">Men Pro</td><td><span class="time-val">1:21:30</span></td><td style="font-size:14px;color:var(--gray-500);">Dallas '25</td></tr>
+          <tr><td><div class="rank-badge rank-1">1</div></td><td style="font-weight:500;">Sarah L.</td><td style="color:var(--gray-500);font-size:13px;">Women Open</td><td><span class="time-val">1:02:14</span><span class="pr-badge">PB</span></td><td style="font-size:13px;color:var(--gray-500);">Hamburg '25</td></tr>
+          <tr><td><div class="rank-badge rank-2">2</div></td><td style="font-weight:500;">Jordan S.</td><td style="color:var(--gray-500);font-size:13px;">Men Open</td><td><span class="time-val">1:14:22</span><span class="pr-badge">PB</span></td><td style="font-size:13px;color:var(--gray-500);">Chicago '25</td></tr>
+          <tr><td><div class="rank-badge rank-3">3</div></td><td style="font-weight:500;">Alex R.</td><td style="color:var(--gray-500);font-size:13px;">Men Open</td><td><span class="time-val">1:18:05</span></td><td style="font-size:13px;color:var(--gray-500);">Chicago '25</td></tr>
+          <tr><td><div class="rank-badge rank-other">4</div></td><td style="font-weight:500;">Maya P.</td><td style="color:var(--gray-500);font-size:13px;">Women Open</td><td><span class="time-val">1:19:44</span></td><td style="font-size:13px;color:var(--gray-500);">Dallas '25</td></tr>
+          <tr><td><div class="rank-badge rank-other">5</div></td><td style="font-weight:500;">Chris W.</td><td style="color:var(--gray-500);font-size:13px;">Men Pro</td><td><span class="time-val">1:21:30</span></td><td style="font-size:13px;color:var(--gray-500);">Dallas '25</td></tr>
         </tbody>
       </table>
     </div>
-    <button class="btn-secondary" style="font-size:14px;padding:11px 22px;">+ Submit your race result</button>
+    <button class="btn-secondary" style="font-size:14px;padding:10px 20px;">+ Submit your race result</button>
+  </div>
+</div>
+
+<!-- RESERVE -->
+<div class="page mobile-pad" id="page-reserve">
+  <div class="reserve-page">
+    <div class="reserve-header">
+      <div><h1>LANE <span>RESERVE</span></h1><p>Click and drag down a lane to select your time block</p></div>
+      <div class="date-nav"><button onclick="changeDay(-1)">&#8249;</button><div class="date-display" id="date-display"></div><button onclick="changeDay(1)">&#8250;</button></div>
+    </div>
+    <div class="timetable-outer">
+      <div class="tt-wrap">
+        <div class="tt-grid" id="tt-grid"></div>
+        <!-- block overlays injected here by JS -->
+      </div>
+    </div>
+    <div class="legend" style="margin-top:1rem;">
+      <div class="legend-item"><div class="legend-swatch" style="background:#3060b8;border:2px solid #0d1a3a;border-radius:4px;"></div>Your reservation</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--gray-50);border:.5px solid var(--gray-100);"></div>Reserved by others</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#fff;border:.5px solid var(--gray-100);"></div>Available</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2>RESERVE <span>LANE</span></h2>
+    <div class="modal-meta" id="modal-meta"></div>
+    <div class="modal-duration" id="modal-duration"></div>
+    <div class="type-selector">
+      <button class="type-btn" id="type-single" onclick="selectType('single')"><span class="type-btn-icon">🏃</span><span class="type-btn-label">Single</span><span class="type-btn-sub">Just you</span></button>
+      <button class="type-btn" id="type-doubles" onclick="selectType('doubles')"><span class="type-btn-icon">👥</span><span class="type-btn-label">Doubles</span><span class="type-btn-sub">+1 partner</span></button>
+      <button class="type-btn" id="type-relay" onclick="selectType('relay')"><span class="type-btn-icon">🔁</span><span class="type-btn-label">Relay</span><span class="type-btn-sub">+3 teammates</span></button>
+    </div>
+    <div id="partner-section" style="display:none;"><div class="user-slots" id="partner-slots"></div></div>
+    <button class="modal-confirm" id="modal-confirm" onclick="confirmReservation()" disabled>Confirm Reservation</button>
   </div>
 </div>
 
 <script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  window.scrollTo(0,0);
-}
-function doSignIn() {
-  document.getElementById('main-nav').style.display = 'none';
-  document.getElementById('user-nav').style.display = 'flex';
-  showPage('dashboard');
-}
-function bookClass(btn) {
-  if (btn.classList.contains('booked') || btn.classList.contains('full')) return;
-  btn.textContent = 'Booked ✓';
-  btn.classList.add('booked');
-}
-function applyFilter(type) {
-  document.querySelectorAll('.filter-chip').forEach(c => {
-    c.classList.remove('active','active-special');
-    if (c.dataset.filter === type) c.classList.add(type === 'special' ? 'active-special' : 'active');
+const tabMap={home:'tab-home',classes:'tab-classes',reserve:'tab-reserve',about:'tab-about',dashboard:'tab-dashboard',results:'tab-results',signin:'tab-home'};
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');window.scrollTo(0,0);const tId=tabMap[id]||'tab-home';document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));const at=document.getElementById(tId);if(at){at.classList.add('active');updateInd(at);}}
+function updateInd(tab){const ind=document.getElementById('tab-indicator'),bar=document.querySelector('.bottom-tabs-inner');if(!ind||!bar)return;const br=bar.getBoundingClientRect(),tr=tab.getBoundingClientRect();ind.style.left=(tr.left-br.left)+'px';ind.style.width=tr.width+'px';}
+function doSignIn(){document.getElementById('main-nav').style.display='none';document.getElementById('user-nav').style.display='flex';showPage('dashboard');}
+function bookClass(btn){if(btn.classList.contains('booked')||btn.classList.contains('full'))return;btn.textContent='Booked ✓';btn.classList.add('booked');}
+function applyFilter(type){document.querySelectorAll('.filter-chip').forEach(c=>{c.classList.remove('active','active-special');if(c.dataset.filter===type)c.classList.add(type==='special'?'active-special':'active');});document.getElementById('clear-btn').classList.toggle('visible',type!=='all');document.querySelectorAll('.class-row').forEach(row=>{if(type==='all'){row.classList.remove('dimmed','highlighted');}else if(row.dataset.type===type){row.classList.remove('dimmed');row.classList.add('highlighted');}else{row.classList.remove('highlighted');row.classList.add('dimmed');}});}
+
+const LANES=5,START_H=6,END_H=21,TOTAL=(END_H-START_H)*2;
+const ROW_H=40; // px per slot row (base)
+const HEAD_H=46; // header row height
+
+function slotLabel(i){const m=START_H*60+i*30,h=Math.floor(m/60),mn=m%60,ap=h<12?'AM':'PM',h12=h===0?12:h>12?h-12:h;return mn===0?`${h12}:00 ${ap}`:`${h12}:30`;}
+function slotTime(i){const m=START_H*60+i*30,h=Math.floor(m/60),mn=m%60,ap=h<12?'AM':'PM',h12=h===0?12:h>12?h-12:h;return`${h12}:${mn===0?'00':'30'} ${ap}`;}
+function rangeInfo(s,e){const from=slotTime(s),em=START_H*60+(e+1)*30,eh=Math.floor(em/60),emn=em%60,ap=eh<12?'AM':'PM',h12=eh===0?12:eh>12?eh-12:eh,to=`${h12}:${emn===0?'00':'30'} ${ap}`,dur=(e-s+1)*30,ds=dur<60?`${dur} min`:dur%60===0?`${dur/60} hr`:`${Math.floor(dur/60)}h ${dur%60}m`;return{from,to,dur:ds};}
+
+let currentDay=new Date(2026,2,16),reservations={},drag={active:false,lane:-1,startSlot:-1,endSlot:-1};
+function fmtKey(d){return d.toISOString().split('T')[0];}
+function fmtDisplay(d){return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+function changeDay(dir){currentDay=new Date(currentDay);currentDay.setDate(currentDay.getDate()+dir);document.getElementById('date-display').textContent=fmtDisplay(currentDay);buildGrid();}
+function seedTaken(){
+  [[new Date(2026,2,16),[[0,2,5],[1,4,7],[2,8,9],[3,0,3],[4,14,17],[0,10,12],[1,18,21]]],
+   [new Date(2026,2,17),[[0,6,9],[2,2,5],[3,12,15],[4,18,21]]],
+   [new Date(2026,2,18),[[1,4,7],[3,8,11],[0,16,19]]]].forEach(([d,seeds])=>{
+    const dk=fmtKey(d);seeds.forEach(([l,s,e])=>{reservations[`${dk}-${l}-${s}-${e}`]={mine:false};});
   });
-  document.getElementById('clear-btn').classList.toggle('visible', type !== 'all');
-  document.querySelectorAll('.class-row').forEach(row => {
-    if (type === 'all') { row.classList.remove('dimmed','highlighted'); }
-    else if (row.dataset.type === type) { row.classList.remove('dimmed'); row.classList.add('highlighted'); }
-    else { row.classList.remove('highlighted'); row.classList.add('dimmed'); }
+}
+function getOcc(dk,lane){const o=new Set();Object.keys(reservations).forEach(k=>{const p=k.split('-'),kdk=p.slice(0,3).join('-'),[kl,ks,ke]=[+p[3],+p[4],+p[5]];if(kdk===dk&&kl===lane)for(let i=ks;i<=ke;i++)o.add(i);});return o;}
+function findRes(dk,lane,slot){return Object.keys(reservations).find(k=>{const p=k.split('-');return p.slice(0,3).join('-')===dk&&+p[3]===lane&&slot>=+p[4]&&slot<=+p[5];})||null;}
+
+function buildGrid(){
+  const dk=fmtKey(currentDay);
+  const wrap=document.querySelector('.tt-wrap');
+  // Remove existing overlays
+  wrap.querySelectorAll('.block-overlay,.block-cancel-overlay').forEach(el=>el.remove());
+
+  const grid=document.getElementById('tt-grid');grid.innerHTML='';
+
+  // Header
+  const hdr=document.createElement('div');hdr.className='tt-head-row';
+  const ht=document.createElement('div');ht.className='tt-head-time';hdr.appendChild(ht);
+  for(let l=0;l<LANES;l++){const lh=document.createElement('div');lh.className='tt-head-lane';lh.textContent=`LANE ${l+1}`;hdr.appendChild(lh);}
+  grid.appendChild(hdr);
+
+  // Rows
+  for(let si=0;si<TOTAL;si++){
+    const row=document.createElement('div');
+    row.className='tt-row'+(si%2===1?' half-hour':'');
+    if(si===TOTAL-1)row.style.borderBottom='none';
+    const tc=document.createElement('div');tc.className='tt-time';tc.textContent=si%2===0?slotLabel(si):'';row.appendChild(tc);
+    for(let l=0;l<LANES;l++){
+      const occ=getOcc(dk,l);
+      const cell=document.createElement('div');cell.className='tt-cell';cell.dataset.lane=l;cell.dataset.slot=si;
+      if(occ.has(si)){
+        const rk=findRes(dk,l,si),res=rk?reservations[rk]:null;
+        if(res&&res.mine){
+          const parts=rk.split('-'),ks=+parts[4],ke=+parts[5];
+          cell.classList.add('mine');
+          if(ks===ke)      cell.classList.add('blk-solo');
+          else if(si===ks) cell.classList.add('blk-top');
+          else if(si===ke) cell.classList.add('blk-bot');
+          else             cell.classList.add('blk-mid');
+        } else {
+          cell.classList.add('taken');
+        }
+      } else {
+        cell.classList.add('available');
+      }
+      cell.addEventListener('mousedown',onDown);
+      cell.addEventListener('mouseover',onOver);
+      cell.addEventListener('touchstart',onTS,{passive:true});
+      cell.addEventListener('touchmove',onTM,{passive:false});
+      row.appendChild(cell);
+    }
+    grid.appendChild(row);
+  }
+
+  document.removeEventListener('mouseup',onUp);document.addEventListener('mouseup',onUp);
+  document.removeEventListener('touchend',onTE);document.addEventListener('touchend',onTE);
+
+  // After DOM is built, position overlay labels using getBoundingClientRect
+  requestAnimationFrame(()=>placeOverlays(dk,wrap));
+}
+
+function placeOverlays(dk,wrap){
+  const wrapRect=wrap.getBoundingClientRect();
+  // Find all mine blocks (keyed by lane+startSlot)
+  const placed=new Set();
+  Object.keys(reservations).forEach(key=>{
+    const p=key.split('-'),kdk=p.slice(0,3).join('-');
+    if(kdk!==dk)return;
+    const res=reservations[key];
+    if(!res.mine)return;
+    const lane=+p[3],ks=+p[4],ke=+p[5];
+    const blockKey=`${lane}-${ks}`;
+    if(placed.has(blockKey))return;
+    placed.add(blockKey);
+
+    // Find the top cell and bottom cell elements
+    const topCell=wrap.querySelector(`.tt-cell[data-lane="${lane}"][data-slot="${ks}"]`);
+    const botCell=wrap.querySelector(`.tt-cell[data-lane="${lane}"][data-slot="${ke}"]`);
+    if(!topCell||!botCell)return;
+
+    const topR=topCell.getBoundingClientRect();
+    const botR=botCell.getBoundingClientRect();
+
+    const top=topR.top-wrapRect.top;
+    const left=topR.left-wrapRect.left;
+    const width=topR.width;
+    const height=botR.bottom-topR.top;
+
+    const r=rangeInfo(ks,ke);
+    const lbl=document.createElement('div');
+    lbl.className='block-overlay';
+    lbl.style.top=top+'px';
+    lbl.style.left=left+'px';
+    lbl.style.width=width+'px';
+    lbl.style.height=height+'px';
+
+    const typeEl=document.createElement('span');typeEl.className='bl-type';
+    typeEl.textContent=res.type==='single'?'Single':res.type==='doubles'?'Doubles':'Relay';
+    lbl.appendChild(typeEl);
+
+    if(res.type==='doubles'){
+      const plist=(res.partners||[]).filter(Boolean);
+      const wEl=document.createElement('span');wEl.className='bl-with';
+      wEl.textContent=plist.length?`with ${plist[0].split(' ')[0]}`:'with partner';
+      lbl.appendChild(wEl);
+    } else if(res.type==='relay'){
+      const names=(res.partners||[]).filter(Boolean).map(p=>p.split(' ')[0]);
+      const wEl=document.createElement('span');wEl.className='bl-with';
+      wEl.textContent=names.length?`with ${names.join(', ')}`:'with teammates';
+      lbl.appendChild(wEl);
+    }
+
+    const tEl=document.createElement('span');tEl.className='bl-time';
+    tEl.textContent=`${r.from}–${r.to}`;
+    lbl.appendChild(tEl);
+
+    wrap.appendChild(lbl);
+
+    // Cancel button — also attached to wrap, top-right corner of block
+    const cb=document.createElement('button');
+    cb.className='block-cancel-overlay';
+    cb.style.top=(top+4)+'px';
+    cb.style.left=(left+width-20)+'px';
+    cb.textContent='×';
+    cb.addEventListener('click',()=>{delete reservations[key];buildGrid();});
+    wrap.appendChild(cb);
   });
 }
-function loadPhoto(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const img = document.getElementById('hero-photo');
-    img.src = e.target.result;
-    img.style.display = 'block';
-    document.getElementById('photo-placeholder').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-}
+
+function onDown(e){const c=e.currentTarget,l=+c.dataset.lane,s=+c.dataset.slot;if(getOcc(fmtKey(currentDay),l).has(s))return;e.preventDefault();drag={active:true,lane:l,startSlot:s,endSlot:s};updatePreview();}
+function onOver(e){if(!drag.active)return;const c=e.currentTarget,l=+c.dataset.lane,s=+c.dataset.slot;if(l!==drag.lane)return;const occ=getOcc(fmtKey(currentDay),l);let end=s;if(s>=drag.startSlot){for(let i=drag.startSlot;i<=s;i++){if(occ.has(i)){end=i-1;break;}}}else{for(let i=drag.startSlot;i>=s;i--){if(occ.has(i)){end=i+1;break;}}}drag.endSlot=end;updatePreview();}
+function onUp(){if(!drag.active)return;drag.active=false;clearPreview();const s=Math.min(drag.startSlot,drag.endSlot),e=Math.max(drag.startSlot,drag.endSlot);if(s>=0&&e>=s)openModal(drag.lane,s,e);}
+function getTC(ev){const t=ev.touches[0],el=document.elementFromPoint(t.clientX,t.clientY);return el&&el.classList.contains('tt-cell')?el:el&&el.closest('.tt-cell');}
+function onTS(e){const c=getTC(e);if(!c||getOcc(fmtKey(currentDay),+c.dataset.lane).has(+c.dataset.slot))return;drag={active:true,lane:+c.dataset.lane,startSlot:+c.dataset.slot,endSlot:+c.dataset.slot};updatePreview();}
+function onTM(e){e.preventDefault();const c=getTC(e);if(!c||!drag.active||+c.dataset.lane!==drag.lane)return;const s=+c.dataset.slot,occ=getOcc(fmtKey(currentDay),drag.lane);let end=s;if(s>=drag.startSlot){for(let i=drag.startSlot;i<=s;i++){if(occ.has(i)){end=i-1;break;}}}else{for(let i=drag.startSlot;i>=s;i--){if(occ.has(i)){end=i+1;break;}}}drag.endSlot=end;updatePreview();}
+function onTE(){if(!drag.active)return;drag.active=false;clearPreview();const s=Math.min(drag.startSlot,drag.endSlot),e=Math.max(drag.startSlot,drag.endSlot);if(s>=0&&e>=s)openModal(drag.lane,s,e);}
+function updatePreview(){const s=Math.min(drag.startSlot,drag.endSlot),e=Math.max(drag.startSlot,drag.endSlot);document.querySelectorAll('.tt-cell').forEach(c=>{c.classList.remove('drag-selecting');const l=+c.dataset.lane,si=+c.dataset.slot;if(drag.active&&l===drag.lane&&si>=s&&si<=e&&!c.classList.contains('taken')&&!c.classList.contains('mine'))c.classList.add('drag-selecting');});}
+function clearPreview(){document.querySelectorAll('.tt-cell.drag-selecting').forEach(c=>c.classList.remove('drag-selecting'));}
+
+const MEMBERS=['Alex Rivera','Maya Patel','Chris Wong','Sam Lee','Taylor Brooks','Casey Kim','Morgan Davis','Jamie Chen','Riley Foster','Drew Parker'];
+let modalState={lane:-1,startSlot:-1,endSlot:-1,type:null,partners:[]};
+const PNEEDED={single:0,doubles:1,relay:3};
+function openModal(lane,s,e){modalState={lane,startSlot:s,endSlot:e,type:null,partners:[]};const r=rangeInfo(s,e);document.getElementById('modal-meta').textContent=`Lane ${lane+1}  ·  ${fmtDisplay(currentDay)}`;document.getElementById('modal-duration').textContent=`${r.from} – ${r.to}  ·  ${r.dur}`;document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('partner-section').style.display='none';document.getElementById('modal-confirm').disabled=true;document.getElementById('modal-backdrop').classList.add('open');}
+function closeModal(){document.getElementById('modal-backdrop').classList.remove('open');clearPreview();}
+function selectType(type){modalState.type=type;modalState.partners=[];document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('type-'+type).classList.add('selected');const n=PNEEDED[type];if(n===0){document.getElementById('partner-section').style.display='none';document.getElementById('modal-confirm').disabled=false;}else{document.getElementById('partner-section').style.display='block';renderP(n);checkC();}}
+function renderP(n){const sl=document.getElementById('partner-slots');sl.innerHTML=`<div class="user-slot-label">${n===1?'Add 1 partner':`Add ${n} teammates`}</div>`;for(let i=0;i<n;i++){const w=document.createElement('div');if(modalState.partners[i]){const ini=modalState.partners[i].split(' ').map(x=>x[0]).join('').slice(0,2);w.innerHTML=`<div class="user-selected"><div class="user-option-avatar">${ini}</div><span class="user-selected-name">${modalState.partners[i]}</span><button class="user-remove" onclick="remP(${i})">×</button></div>`;}else{w.innerHTML=`<div class="user-search-wrap"><input class="user-search" placeholder="Search member name..." oninput="showD(this,${i})" onfocus="showD(this,${i})" onblur="setTimeout(()=>hideD(${i}),150)"/><div class="user-dropdown" id="drop-${i}" style="display:none;"></div></div>`;}sl.appendChild(w);}}
+function showD(input,idx){const dd=document.getElementById('drop-'+idx);if(!dd)return;const q=input.value.toLowerCase(),f=MEMBERS.filter(m=>m.toLowerCase().includes(q)&&!modalState.partners.includes(m)).slice(0,6);dd.innerHTML=f.map(m=>{const i=m.split(' ').map(x=>x[0]).join('').slice(0,2);return`<div class="user-option" onmousedown="addP('${m}',${idx})"><div class="user-option-avatar">${i}</div>${m}</div>`;}).join('');dd.style.display=f.length?'block':'none';}
+function hideD(idx){const d=document.getElementById('drop-'+idx);if(d)d.style.display='none';}
+function addP(name,idx){modalState.partners[idx]=name;renderP(PNEEDED[modalState.type]);checkC();}
+function remP(idx){modalState.partners.splice(idx,1);renderP(PNEEDED[modalState.type]);checkC();}
+function checkC(){document.getElementById('modal-confirm').disabled=modalState.partners.filter(Boolean).length<(PNEEDED[modalState.type]||0);}
+function confirmReservation(){const dk=fmtKey(currentDay),key=`${dk}-${modalState.lane}-${modalState.startSlot}-${modalState.endSlot}`;reservations[key]={mine:true,type:modalState.type,partners:[...modalState.partners]};closeModal();buildGrid();}
+
+seedTaken();
+document.getElementById('date-display').textContent=fmtDisplay(currentDay);
+buildGrid();
+window.addEventListener('resize',()=>{const t=document.querySelector('.tab-btn.active');if(t)updateInd(t);});
+setTimeout(()=>{const t=document.getElementById('tab-home');if(t)updateInd(t);},150);
+document.getElementById('modal-backdrop').addEventListener('click',function(e){if(e.target===this)closeModal();});
 </script>
